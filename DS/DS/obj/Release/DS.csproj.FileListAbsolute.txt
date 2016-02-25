@@ -1,0 +1,12 @@
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\bin\Release\DS.exe.config
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.Form1.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.Properties.Resources.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.csproj.GenerateResource.Cache
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\bin\Release\DS.exe
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\bin\Release\DS.pdb
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.csprojResolveAssemblyReference.cache
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.exe
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.pdb
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.EditForm.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.CreateForm.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.ReferenseForm.resources
