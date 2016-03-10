@@ -25,6 +25,7 @@ namespace DS
         }
         private FilesProvider Provider = new FilesProvider();//работа с файлами
         ProbabilityModel Model = new ProbabilityModel();//вероятностная модель
+        GraphModel GraphModel = new GraphModel();//Графовая модель
 
         EditForm EditScenario;
         CreateForm CreateScenario;
