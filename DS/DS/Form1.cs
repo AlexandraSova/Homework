@@ -23,23 +23,17 @@ namespace DS
         {
             return Answer;
         }
-        private FilesProvider Provider = new FilesProvider();//работа с файлами
-        ProbabilityModel Model = new ProbabilityModel();//вероятностная модель
-        GraphModel GraphModel = new GraphModel();//Графовая модель
+       
+        Controller Controller = new Controller();
 
         EditForm EditScenario;
         CreateForm CreateScenario;
 
-        public int Question;//номер текущего вопроса
-        public int NextQuestion;//вопрос, на который перешли
-        private string Scenario;//текущий сценарий
-
-        private int ChoiseOrProcessForOk;//переключалка для двух функций кнопки ок, надо придумать что-то получше
         private int row_number = 0;//номер строки в протоколе
 
-        private void Choise(string answer)//Корректность чтения файла
+        private void CorrectSearchFile(string answer)//Корректность нахождения пути к файлу файла
         {
-            if (Provider.SearchFile(answer) == false)
+            if (Controller.CorrectSearchFile(answer) == false)
             {
                 Error.Text = "Ошибка!";
                 AnswerText.Text = "";
@@ -48,47 +42,21 @@ namespace DS
             {
                 Referense.Visible = true;
                 AnswerText.Text = "";
-                ChoiseOrProcessForOk = 2;
-                Scenario = answer;
                 Go();
             }
         }
 
-        private void CorrectReadQuestions()
+        private void CorrectReadFiles()//корректность чтения инфы сценария
         {
-            if (Provider.ReadQuestions() == false)
+            if (Controller.CorrectReadFiles()==false)
             {
-                Error.Text = "Не могу прочитать файл с вопросами!";
+                Error.Text = "Не могу прочитать сценарий!";
             }
         }
 
-        private void CorrectReadReferense()
+        private void IntProtocol()//коррекция
         {
-            if (Provider.ReadReferense() == false)
-            {
-                Error.Text = "Не могу прочитать файл со справкой!";
-            }
-        }
-
-        private void CorrectReadInfoOfQuestions()
-        {
-            if (Provider.ReadInfoOfQuestions() == false)
-            {
-                Error.Text = "Не могу прочитать файл!";
-            }
-        }
-
-        private void CorrectReadCorrectAnswers()
-        {
-            if (Provider.ReadCorrectAnswers() == false)
-            {
-                Error.Text = "Не могу прочитать файл!";
-            }
-        }
-
-        private void IntProtocol()
-        {
-            for (int i = 0; i < Provider.Questions.Count(); i++)
+            for (int i = 0; i < Controller.N; i++)
             {
                 Protocol.Rows.Add();
                 Protocol.AutoSizeRowsMode =
@@ -105,22 +73,7 @@ namespace DS
         {
             bool CorrectData = false;
             Answer = AnswerText.Text;
-            List<string> CorrectAnswer = Provider.CorrectAnswers[n];
-            for (int i = 0; i < CorrectAnswer.Count(); i++)
-            {
-                if (CorrectAnswer[i] != "%")
-                {
-                    if (CorrectAnswer[i] == Answer)
-                    {
-                        CorrectData = true;
-                        break;
-                    }
-                }
-                else
-                {
-                    CorrectData = true;
-                }
-            }
+            CorrectData = Controller.CorrectAnswer(n, Answer);
             if (CorrectData == false)
             {
                 Error.Text = "Извините, такого варианта ответа нет!";
@@ -147,44 +100,21 @@ namespace DS
 
         public void AskQuestions(int n, string answer)
         {
-            List<string> next_questions = Provider.Graph[n];
-
-            if (Provider.type_trans[n] == 0)
+            string[] Input = Controller.AskQuestions(n, answer);
+            if (Input[1]=="Close")
             {
                 this.Close();
             }
             else
             {
-                string next_one_question = Model.Select(Provider.type_trans[n], next_questions, answer, Provider);
-                Random rnd = new Random();
-                string question = "";
-                bool x = false;
-                NextQuestion = Provider.SearchDSQuestion(next_one_question);
-                if (next_one_question == "Стоимость")
+                if(Input[2]=="Repeat")
                 {
-                    question = "Стоимость проекта составит " + rnd.Next(1000, 10000) + "р, " + "коэффициент качества " + rnd.Next(0, 100) + "%.";
-                    x = true;
-                }
-
-                if (NextQuestion != 1)
-                {
-                    if (x == false)
-                    {
-                        question = Provider.ReturnOneQuestion(NextQuestion);
-                        AskQuestion(question);
-                    }
-                    else
-                    {
-                        AskQuestion(question);
-                    }
+                    IntProtocol();
+                    AskQuestion(Input[0]);
                 }
                 else
                 {
-                    Provider.Graph = new List<List<string>>();
-                    Provider.IntGraph();
-                    IntProtocol();
-                    question = Provider.ReturnOneQuestion(NextQuestion);
-                    AskQuestion(question);
+                    AskQuestion(Input[0]);
                 }
             }
         }
@@ -198,14 +128,9 @@ namespace DS
             ReferenseLabel.Text = "";
             ReferenseText.Text = "";
             QuestionLabel.Text = "Вопрос";
-            CorrectReadQuestions();
-            CorrectReadReferense();
-            CorrectReadInfoOfQuestions();
-            CorrectReadCorrectAnswers();
-            Provider.IntGraph();
+            CorrectReadFiles();
             IntProtocol();
-            string question = Provider.ReturnOneQuestion(1);
-            Question = 1;
+            string question = Controller.Go();
             AskQuestion(question);
         }
 
@@ -221,30 +146,29 @@ namespace DS
             DialogLabel.Text = "";
             Protocol.Visible = false;
             Record.Visible = false;
-            ChoiseOrProcessForOk = 1;
         }
 
-        private void Ok_Click(object sender, EventArgs e)
+        private void Ok_Click(object sender, EventArgs e)//коррекция
         {
-            if (ChoiseOrProcessForOk == 1)
+            if (Controller.N==0)//коррекция
             {
                 Answer = AnswerText.Text;
-                Choise(Answer);
+                CorrectSearchFile(Answer);
             }
             else
             {
                 Error.Text = "";
-                bool correct_answer = CorrectAnswer(Question);
-                string question = Provider.ReturnOneQuestion(Question);
+                bool correct_answer = CorrectAnswer(Controller.Question);
+                string question = Controller.ReturnOneQuestion(Controller.Question);//коррекция
                 if (correct_answer)
                 {
                     ReferenseLabel.Text = "";
                     ReferenseText.Text = "";
                     Answer = ReturnAnswer();
-                    Protokol(question, Answer, Question);
-                    AskQuestions(Question, Answer);
+                    Protokol(question, Answer, Controller.Question);
+                    AskQuestions(Controller.Question, Answer);
                     AnswerText.Text = "";
-                    Question = NextQuestion;
+                    Controller.Question = Controller.NextQuestion;
                 }
             }
         }
@@ -271,35 +195,21 @@ namespace DS
 
         private void Record_Click(object sender, EventArgs e)
         {
-
             int N_Rows = Protocol.Rows.Count;
-            Random rnd = new Random();
             string[] ques = new string[N_Rows];
             string[] ans = new string[N_Rows];
+
             for (int i = 0; i < N_Rows; i++)
             {
                 ques[i] = Convert.ToString(Protocol.Rows[i].Cells[0].Value);
                 ans[i] = Convert.ToString(Protocol.Rows[i].Cells[1].Value);
             }
-            string path = "scenarios\\" + Scenario + "_protokol.txt";
-            if (!File.Exists(path))
-            {
-                File.Create(path).Close();
-            }
-            else
-            {
-                path = "scenarios\\" + Scenario + "_protokol" + rnd.Next(0, 10000) + ".txt";
-                File.Create(path).Close();
-            }
-
-            StreamWriter output = new StreamWriter(path);
-            for (int i = 0; i < ques.Count(); i++)
-            {
-                output.Write("Вопрос: " + ques[i] + " ");
-                output.WriteLine("Ответ: " + ans[i]);
-            }
-            output.Close();
+            Controller.Record(ques, ans);
             MessageBox.Show("Ход диалога успешно задокументирован.");
+        }
+
+        private void Referense_Click(object sender, EventArgs e)//написать!
+        {
 
         }
     }

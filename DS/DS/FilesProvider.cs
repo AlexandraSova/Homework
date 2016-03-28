@@ -7,7 +7,7 @@ using System.Text;
 namespace DS
 {
     class FilesProvider
-    {
+    {//то, что помечено, как оставит, оставить здесь, остальное будет перенесено в контроллер(?)
         private string ScenarioNume;//Имя сценария
         private string ScenarioPapka;//папка со всеми файлами сценария
         private string Scenario;//путь к сценарию
@@ -47,6 +47,29 @@ namespace DS
             return number;
         }
 
+        public void WriteProtocol(string[] ques, string[] ans)
+        {
+            Random rnd = new Random();
+            string path = "scenarios\\" + Scenario + "_protokol.txt";
+
+            if (!File.Exists(path))
+            {
+                File.Create(path).Close();
+            }
+            else
+            {
+                path = "scenarios\\" + Scenario + "_protokol" + rnd.Next(0, 10000) + ".txt";
+                File.Create(path).Close();
+            }
+
+            StreamWriter output = new StreamWriter(path);
+            for (int i = 0; i < ques.Count(); i++)
+            {
+                output.Write("Вопрос: " + ques[i] + " ");
+                output.WriteLine("Ответ: " + ans[i]);
+            }
+            output.Close();
+        }//оставить
         public bool SearchFile(string answer)
         {
             string Way = "";
@@ -79,7 +102,7 @@ namespace DS
                 ScenarioPapka = Way;
             }
             return SearchFiles;
-        }
+        }//оставить
         public bool ReadReferense()
         {
             string way = "scenarios" + ScenarioPapka + "spravka.txt";
@@ -121,7 +144,7 @@ namespace DS
                 }
             }
             return b;
-        }
+        }//оставить
         public bool ReadQuestions()
         {
             List<List<char>> questions1 = new List<List<char>>();
@@ -182,7 +205,7 @@ namespace DS
                 StringData = "";
             }
             return b;
-        }
+        }//оставить
         public bool ReadInfoOfQuestions()
         {
             string way = "scenarios" + ScenarioPapka + "transitions.txt";
@@ -233,7 +256,7 @@ namespace DS
                 }
             }
             return b;
-        }
+        }//оставить
         public bool ReadCorrectAnswers()
         {
             string way = "scenarios" + ScenarioPapka + "correctanswers.txt";
@@ -304,7 +327,7 @@ namespace DS
                 answers = new List<string>();
             }
             return b;
-        }
+        }//оставить
         public void IntGraph()
         {
             string r = "";
@@ -338,10 +361,12 @@ namespace DS
                 ListNumber = new List<string>();
             }
         }
+
         public string ReturnOneQuestion(int i)
         {
             return Questions[i];
         }
+
         public void ClearScenario()
         {
             Questions.Clear();
@@ -392,7 +417,7 @@ namespace DS
                 output4.Write("*");
             }
             output4.Close();
-        }
+        }//оставить
         public bool CreateNewScenarioFiles(string Name)
         {
             string path = "scenarios\\" + Name + ".txt";
@@ -428,7 +453,6 @@ namespace DS
 
             }
             return correct;
-        }
-
+        }//оставить
     }
 }

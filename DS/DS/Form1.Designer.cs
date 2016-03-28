@@ -182,6 +182,7 @@
             this.Referense.TabIndex = 12;
             this.Referense.Text = "Справка";
             this.Referense.UseVisualStyleBackColor = true;
+            this.Referense.Click += new System.EventHandler(this.Referense_Click);
             // 
             // Ok
             // 

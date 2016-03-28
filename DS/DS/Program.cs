@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DS
-{
+{ 
     static class Program
     {
         /// <summary>

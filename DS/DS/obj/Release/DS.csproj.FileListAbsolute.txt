@@ -10,3 +10,15 @@ C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Re
 C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.EditForm.resources
 C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.CreateForm.resources
 C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Release\DS.ReferenseForm.resources
+D:\Сухорученко\поликашин\DS\DS\bin\Release\DS.exe.config
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.exe
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.pdb
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.csprojResolveAssemblyReference.cache
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.CreateForm.resources
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.EditForm.resources
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.Form1.resources
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.Properties.Resources.resources
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.ReferenseForm.resources
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.csproj.GenerateResource.Cache
+D:\Сухорученко\поликашин\DS\DS\bin\Release\DS.exe
+D:\Сухорученко\поликашин\DS\DS\bin\Release\DS.pdb
