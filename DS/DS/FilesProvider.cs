@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace DS
 {
@@ -11,41 +12,6 @@ namespace DS
         private string ScenarioNume;//Имя сценария
         private string ScenarioPapka;//папка со всеми файлами сценария
         private string Scenario;//путь к сценарию
-        public List<string> Questions = new List<string>();//вопросы сценария
-        public List<string> Referense = new List<string>();//справка
-        public List<string> InfoOfQuestions = new List<string>();//информация по каждому из вопросов
-        public List<List<string>> CorrectAnswers = new List<List<string>>();//корректные ответы
-        public List<string> CorrectAnswersForWrite = new List<string>();//для записи в файл
-        public List<List<string>> Graph = new List<List<string>>();//следующие вопросы
-        public List<string> GraphForWrite = new List<string>();//граф для записи в файл
-        public List<int> type_trans = new List<int>();//типы переходов
-
-        public void DeleteNumbers(string number)
-        {
-            for (int i = 0; i < Graph.Count(); i++)
-            {
-                Graph[i].Remove(number);
-            }
-        }
-
-        public int SearchDSQuestion(string question)
-        {
-            int number = 0;
-            bool serach = false;
-            for (int i = 0; i < Graph.Count(); i++)
-            {
-                if (question == Questions[i])
-                {
-                    number = i;
-                    serach = true;
-                }
-            }
-            if (serach == false)
-            {
-
-            }
-            return number;
-        }
 
         public void WriteProtocol(string[] ques, string[] ans)
         {
@@ -103,10 +69,10 @@ namespace DS
             }
             return SearchFiles;
         }//оставить
-        public bool ReadReferense()
+        public List<string> ReadReferense()
         {
             string way = "scenarios" + ScenarioPapka + "spravka.txt";
-            bool b = false;
+            List<string> Referense = new List<string>();
             if (ScenarioNume == "1")
             {
                 try
@@ -117,12 +83,11 @@ namespace DS
                         {
                             Referense.Add(sr.ReadLine());
                         }
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = false;
+                    MessageBox.Show("Ошибка!");
                 }
             }
             else
@@ -135,22 +100,21 @@ namespace DS
                         {
                             Referense.Add(sr.ReadLine());
                         }
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = true;
+                    MessageBox.Show("Ошмбка!");
                 }
             }
-            return b;
+            return Referense;
         }//оставить
-        public bool ReadQuestions()
+        public List<string> ReadQuestions()
         {
             List<List<char>> questions1 = new List<List<char>>();
             string Way = "scenarios" + ScenarioPapka + "DS.txt";
             String StringData = "";//считывание файла сюда первоначально
-            bool b = false;
+            List<string> Questions = new List<string>();
             List<char> OneQuestion = new List<char>();
             if (ScenarioNume == "1")//костыль из-за проблемы с кодировками
             {
@@ -159,12 +123,11 @@ namespace DS
                     using (StreamReader sr = new StreamReader(Way, Encoding.Default))
                     {
                         StringData = sr.ReadToEnd();
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = false;
+                    MessageBox.Show("Ошибка!");
                 }
             }
             else
@@ -174,12 +137,11 @@ namespace DS
                     using (StreamReader sr = new StreamReader(Way))
                     {
                         StringData = sr.ReadToEnd();
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = false;
+                    MessageBox.Show("Ошибка!");
                 }
             }
             for (int i = 0; i < StringData.Count(); i++)
@@ -204,14 +166,14 @@ namespace DS
                 Questions.Add(StringData);
                 StringData = "";
             }
-            return b;
+            return Questions;
         }//оставить
-        public bool ReadInfoOfQuestions()
+        public List<string> ReadInfoOfQuestions()
         {
             string way = "scenarios" + ScenarioPapka + "transitions.txt";
             String StringData = "";
             string one_number = "";
-            bool b = false;
+            List<string> InfoOfQuestions = new List<string>();
 
             if (ScenarioNume == "1")
             {
@@ -220,12 +182,11 @@ namespace DS
                     using (StreamReader sr = new StreamReader(@way, Encoding.Default))
                     {
                         StringData = sr.ReadToEnd();
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = false;
+                    MessageBox.Show("Ошибка!");
                 }
             }
             else
@@ -235,12 +196,11 @@ namespace DS
                     using (StreamReader sr = new StreamReader(@way))
                     {
                         StringData = sr.ReadToEnd();
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = false;
+                    MessageBox.Show("Ошибка");
                 }
             }
             for (int i = 0; i < StringData.Count(); i++)
@@ -255,9 +215,9 @@ namespace DS
                     one_number = "";
                 }
             }
-            return b;
+            return InfoOfQuestions;
         }//оставить
-        public bool ReadCorrectAnswers()
+        public List<List<string>> ReadCorrectAnswers()
         {
             string way = "scenarios" + ScenarioPapka + "correctanswers.txt";
             String StringData = "";
@@ -265,7 +225,7 @@ namespace DS
             List<string> StringData2 = new List<string>();
             string one_answer = "";
             string word = "";
-            bool b = false;
+            List<List<string>> CorrectAnswers = new List<List<string>>();
 
             if (ScenarioNume == "1")
             {
@@ -274,12 +234,11 @@ namespace DS
                     using (StreamReader sr = new StreamReader(@way, Encoding.Default))
                     {
                         StringData = sr.ReadLine();
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = false;
+                    MessageBox.Show("Ошибка!");
                 }
             }
             else
@@ -289,12 +248,11 @@ namespace DS
                     using (StreamReader sr = new StreamReader(@way))
                     {
                         StringData = sr.ReadLine();
-                        b = true;
                     }
                 }
                 catch (Exception e)
                 {
-                    b = false;
+                    MessageBox.Show("Ошибка!");
                 }
             }
             for (int i = 0; i < StringData.Count(); i++)
@@ -326,56 +284,10 @@ namespace DS
                 CorrectAnswers.Add(answers);
                 answers = new List<string>();
             }
-            return b;
+            return CorrectAnswers;
         }//оставить
-        public void IntGraph()
-        {
-            string r = "";
-            string StringData = "";
-            List<char> OneQuestion = new List<char>();
-            List<string> ListNumber = new List<string>();
 
-            for (int i = 0; i < InfoOfQuestions.Count(); i++)
-            {
-                r = Convert.ToString(InfoOfQuestions[i][0]);
-                type_trans.Add(Convert.ToInt32(r));
-
-                for (int j = 2; j < InfoOfQuestions[i].Count(); j++)
-                {
-                    if (InfoOfQuestions[i][j] != ';')
-                    {
-                        OneQuestion.Add(InfoOfQuestions[i][j]);
-                    }
-                    else
-                    {
-                        for (int q = 0; q < OneQuestion.Count(); q++)
-                        {
-                            StringData = StringData + OneQuestion[q];
-                        }
-                        ListNumber.Add(StringData);
-                        StringData = "";
-                        OneQuestion = new List<char>();
-                    }
-                }
-                Graph.Add(ListNumber);
-                ListNumber = new List<string>();
-            }
-        }
-
-        public string ReturnOneQuestion(int i)
-        {
-            return Questions[i];
-        }
-
-        public void ClearScenario()
-        {
-            Questions.Clear();
-            CorrectAnswersForWrite.Clear();
-            Referense.Clear();
-            type_trans.Clear();
-            GraphForWrite.Clear();
-        }
-        public void WriteScenario(string Name)
+        public void WriteScenario(string Name, List<string> Questions, List<string> Referense, List<string> CorrectAnswersForWrite, List<string> GraphForWrite, List<int> type_trans)
         {
             string way1 = "scenarios\\" + Name + "_correctanswers.txt";
             string way2 = "scenarios\\" + Name + "_DS.txt";
@@ -417,7 +329,7 @@ namespace DS
                 output4.Write("*");
             }
             output4.Close();
-        }//оставить
+        }//?????оставить
         public bool CreateNewScenarioFiles(string Name)
         {
             string path = "scenarios\\" + Name + ".txt";

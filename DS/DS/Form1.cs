@@ -46,12 +46,9 @@ namespace DS
             }
         }
 
-        private void CorrectReadFiles()//корректность чтения инфы сценария
+        private void ReadFiles()//корректность чтения инфы сценария
         {
-            if (Controller.CorrectReadFiles()==false)
-            {
-                Error.Text = "Не могу прочитать сценарий!";
-            }
+            Controller.ReadFiles();
         }
 
         private void IntProtocol()//коррекция
@@ -128,7 +125,7 @@ namespace DS
             ReferenseLabel.Text = "";
             ReferenseText.Text = "";
             QuestionLabel.Text = "Вопрос";
-            CorrectReadFiles();
+            ReadFiles();
             IntProtocol();
             string question = Controller.Go();
             AskQuestion(question);

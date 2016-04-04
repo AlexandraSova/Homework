@@ -7,7 +7,7 @@ namespace DS
 {
     class ProbabilityModel
     {
-        public string Select(int n, List<string> next_questions, string answer, FilesProvider Provider)
+        public string Select(int n, List<string> next_questions, string answer, List<List<string>> Graph)
         {
             string next = "";
             int x;
@@ -43,7 +43,7 @@ namespace DS
                     {
                         next = next_questions[Count - 1];
                     }
-                    Provider.DeleteNumbers(next);
+                    Graph = DeleteNumbers(next, Graph);
                     break;
                 }
                 if (n == 2)
@@ -58,7 +58,7 @@ namespace DS
                     {
                         next = next_questions[Count - 1];
                     }
-                    Provider.DeleteNumbers(next);
+                    Graph = DeleteNumbers(next, Graph);
                     break;
                 }
 
@@ -84,7 +84,7 @@ namespace DS
                     x = Count - 1;
                     rnd_next = rnd.Next(0, x);
                     next = next_questions[rnd_next];
-                    Provider.DeleteNumbers(next);
+                    Graph = DeleteNumbers(next, Graph);
                     break;
                 }
                 if (n == 6)
@@ -106,13 +106,23 @@ namespace DS
                         {
                             next = next_questions[Count - 1];
                         }
-                        Provider.DeleteNumbers(next);
+                        Graph = DeleteNumbers(next, Graph);
                     }
                     break;
                 }
 
             }
             return next;
+        }
+        private List<List<string>> DeleteNumbers(string number, List<List<string>> Graph)
+        {
+            List<List<string>> gr = new List<List<string>>();
+            for (int i = 0; i < Graph.Count(); i++)
+            {
+                Graph[i].Remove(number);
+            }
+            gr = Graph;
+            return gr;
         }
     }
 }

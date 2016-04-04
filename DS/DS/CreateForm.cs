@@ -20,7 +20,7 @@ namespace DS
         int N_Rows;
         int N_Columns;
         string NameScenario;
-        FilesProvider Provider = new FilesProvider();
+        ControllerForCreateForm Controller = new ControllerForCreateForm();
         ReferenseForm Referense;
         
         private void CreateForm_Load(object sender, EventArgs e)
@@ -30,21 +30,28 @@ namespace DS
 
         private void ReadTable()
         {
+            List<string> Questions = new List<string>();
+            List<int> type_trans = new List<int>();
+            List<string> GraphForWrite=new List<string>();
+            List<string> CorrectAnswersForWrite=new List<string>();
+            List<string> Referense = new List<string>();
+
             for (int i = 0; i < N_Rows; i++)
             {
-                Provider.Questions.Add(Convert.ToString(Scenario.Rows[i].Cells[0].Value));
-                Provider.type_trans.Add(Convert.ToInt32(Scenario.Rows[i].Cells[2].Value));
-                Provider.GraphForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[3].Value));
-                Provider.CorrectAnswersForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[4].Value));
-                Provider.Referense.Add(Convert.ToString(Scenario.Rows[i].Cells[5].Value));
+                Questions.Add(Convert.ToString(Scenario.Rows[i].Cells[0].Value));
+                type_trans.Add(Convert.ToInt32(Scenario.Rows[i].Cells[1].Value));
+                GraphForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[2].Value));
+                CorrectAnswersForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[3].Value));
+                Referense.Add(Convert.ToString(Scenario.Rows[i].Cells[4].Value));
             }
+            Controller.WriteScenario(NameScenario, Questions, Referense, CorrectAnswersForWrite, GraphForWrite, type_trans);
         }
 
         private void ok_Click(object sender, EventArgs e)
         {
             bool correct;
             NameScenario = ScenarioName.Text;
-            correct = Provider.CreateNewScenarioFiles(NameScenario);
+            correct = Controller.CreateNewScenario(NameScenario);
             if (correct)
             {
                 Error.Text = "Название принято";
@@ -60,9 +67,7 @@ namespace DS
         {
             N_Rows = Scenario.Rows.Count - 1;
             N_Columns = Scenario.Columns.Count;
-            Provider.ClearScenario();
             ReadTable();
-            Provider.WriteScenario(NameScenario);
             this.Close();
             MessageBox.Show("Сценарий сохранен.");
         }

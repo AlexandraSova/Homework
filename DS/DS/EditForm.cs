@@ -18,9 +18,10 @@ namespace DS
         }
 
         private string NameScenario;
-        private FilesProvider Provider = new FilesProvider();
-        int N_Rows;//количество строк
-        int N_Columns;//количество столбцов
+        private ControllerForEditForm Controller = new ControllerForEditForm();
+        private int N_Rows;//количество строк
+        private int N_Columns;//количество столбцов
+        private Dialog Dialog;
 
         private void EditForm_Load(object sender, EventArgs e)
         {
@@ -29,16 +30,14 @@ namespace DS
 
         private void ReadData()
         {
-            Provider.ReadQuestions();
-            Provider.ReadInfoOfQuestions();
-            Provider.ReadCorrectAnswers();
-            Provider.ReadReferense();
-            Provider.IntGraph();
+            Controller.ReadFiles();
         }
+
         private void OpenScenario()
         {
             ReadData();
-            for (int i = 0; i < Provider.Questions.Count(); i++)
+            Dialog = Controller.GetDialog;
+            for (int i = 0; i < Dialog.Questions.Count(); i++)
             {
                 Scenario.Rows.Add();
                 Scenario.AutoSizeRowsMode =
@@ -47,39 +46,39 @@ namespace DS
             Scenario.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
 
-            for (int i = 0; i < Provider.Questions.Count(); i++)
+            for (int i = 0; i < Dialog.Questions.Count(); i++)
             {
                 string StringData = "";
                 string StringData2 = "";
-                for (int j = 0; j < Provider.Graph[i].Count(); j++)
+                for (int j = 0; j < Dialog.Graph[i].Count(); j++)
                 {
-                    if (j != (Provider.Graph[i].Count() - 1))
+                    if (j != (Dialog.Graph[i].Count() - 1))
                     {
-                        StringData = StringData + Provider.Graph[i][j] + ";";
+                        StringData = StringData + Dialog.Graph[i][j] + ";";
                     }
                     else
                     {
-                        StringData = StringData + Provider.Graph[i][j];
+                        StringData = StringData + Dialog.Graph[i][j];
                     }
                 }
 
-                for (int q = 0; q < Provider.CorrectAnswers[i].Count(); q++)
+                for (int q = 0; q < Dialog.CorrectAnswers[i].Count(); q++)
                 {
-                    if (q != (Provider.CorrectAnswers[i].Count() - 1))
+                    if (q != (Dialog.CorrectAnswers[i].Count() - 1))
                     {
-                        StringData2 = StringData2 + Provider.CorrectAnswers[i][q] + ";";
+                        StringData2 = StringData2 + Dialog.CorrectAnswers[i][q] + ";";
                     }
                     else
                     {
-                        StringData2 = StringData2 + Provider.CorrectAnswers[i][q];
+                        StringData2 = StringData2 + Dialog.CorrectAnswers[i][q];
                     }
                 }
 
-                Scenario.Rows[i].Cells[0].Value = Provider.Questions[i];
-                Scenario.Rows[i].Cells[1].Value = Provider.type_trans[i];
+                Scenario.Rows[i].Cells[0].Value = Dialog.Questions[i];
+                Scenario.Rows[i].Cells[1].Value = Dialog.type_trans[i];
                 Scenario.Rows[i].Cells[2].Value = StringData;
                 Scenario.Rows[i].Cells[3].Value = StringData2;
-                Scenario.Rows[i].Cells[4].Value = Provider.Referense[i];
+                Scenario.Rows[i].Cells[4].Value = Dialog.Referense[i];
                 StringData = "";
                 StringData2 = "";
             }
@@ -88,11 +87,11 @@ namespace DS
         {
             for (int i = 0; i < N_Rows; i++)
             {
-                Provider.Questions.Add(Convert.ToString(Scenario.Rows[i].Cells[0].Value));
-                Provider.type_trans.Add(Convert.ToInt32(Scenario.Rows[i].Cells[1].Value));
-                Provider.GraphForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[2].Value));
-                Provider.CorrectAnswersForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[3].Value));
-                Provider.Referense.Add(Convert.ToString(Scenario.Rows[i].Cells[4].Value));
+                Dialog.Questions.Add(Convert.ToString(Scenario.Rows[i].Cells[0].Value));
+                Dialog.type_trans.Add(Convert.ToInt32(Scenario.Rows[i].Cells[1].Value));
+                Dialog.GraphForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[2].Value));
+                Dialog.CorrectAnswersForWrite.Add(Convert.ToString(Scenario.Rows[i].Cells[3].Value));
+                Dialog.Referense.Add(Convert.ToString(Scenario.Rows[i].Cells[4].Value));
             }
         }
 
@@ -100,10 +99,15 @@ namespace DS
         {
             bool correct;
             NameScenario = ScenarioName.Text;
-            correct = Provider.SearchFile(NameScenario);
+            correct = Controller.CorrectSearchFile(NameScenario);
             if (correct)
             {
                 OpenScenario();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка!");
+                ScenarioName.Text = "";
             }
         }
 
@@ -139,9 +143,9 @@ namespace DS
         {
             N_Rows = Scenario.Rows.Count - 1;
             N_Columns = Scenario.Columns.Count;
-            Provider.ClearScenario();
+            Controller.ClearScenario();
             ReadTable();
-            Provider.WriteScenario(this.NameScenario);
+            Controller.WriteScenario(NameScenario, Dialog.Questions, Dialog.Referense, Dialog.CorrectAnswersForWrite, Dialog.GraphForWrite, Dialog.type_trans);
             this.Close();
             MessageBox.Show("Сценарий сохранен.");
         }
