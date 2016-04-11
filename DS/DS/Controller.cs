@@ -33,15 +33,11 @@ namespace DS
             return b;
         }
 
-        public void ReadFiles()
+        public void ReadDialog()
         {
-            Dialog.Questions = Provider.ReadQuestions();
-            Dialog.Referense = Provider.ReadReferense();
-            Dialog.InfoOfQuestions = Provider.ReadInfoOfQuestions();
-            Dialog.CorrectAnswers = Provider.ReadCorrectAnswers();
-            Dialog.IntGraph();
+            Provider.ReadDialog(Dialog);
             N = Dialog.Questions.Count();
-        }//корректность чтения данных сценария
+        }
 
         public bool CorrectAnswer(int n, string answer)//корректность ответа пользователя
         {
@@ -114,7 +110,7 @@ namespace DS
             Provider.WriteProtocol(q, a);
         }
 
-        public string ReturnOneQuestion(int x)//убратьисправить
+        public string ReturnOneQuestion(int x)
         {
             string question = Dialog.ReturnOneQuestion(x);
             return question;

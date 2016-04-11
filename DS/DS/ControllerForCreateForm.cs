@@ -15,7 +15,7 @@ namespace DS
 
         public void WriteScenario(string Name, List<string> Questions, List<string> Referense, List<string> CorrectAnswersForWrite, List<string> GraphForWrite, List<int> type_trans)
         {
-            Provider.WriteScenario(Name, Questions, Referense, CorrectAnswersForWrite, GraphForWrite, type_trans);
+            Provider.WriteDialog(Name, Questions, Referense, CorrectAnswersForWrite, GraphForWrite, type_trans);
         }
     }
 }

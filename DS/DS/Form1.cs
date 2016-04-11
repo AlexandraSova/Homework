@@ -48,7 +48,7 @@ namespace DS
 
         private void ReadFiles()//корректность чтения инфы сценария
         {
-            Controller.ReadFiles();
+            Controller.ReadDialog();
         }
 
         private void IntProtocol()//коррекция

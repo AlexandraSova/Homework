@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace DS
 {
     class FilesProvider
-    {//то, что помечено, как оставит, оставить здесь, остальное будет перенесено в контроллер(?)
+    {
         private string ScenarioNume;//Имя сценария
         private string ScenarioPapka;//папка со всеми файлами сценария
         private string Scenario;//путь к сценарию
@@ -35,7 +35,7 @@ namespace DS
                 output.WriteLine("Ответ: " + ans[i]);
             }
             output.Close();
-        }//оставить
+        }
         public bool SearchFile(string answer)
         {
             string Way = "";
@@ -68,8 +68,8 @@ namespace DS
                 ScenarioPapka = Way;
             }
             return SearchFiles;
-        }//оставить
-        public List<string> ReadReferense()
+        }
+        private List<string> ReadReferense()
         {
             string way = "scenarios" + ScenarioPapka + "spravka.txt";
             List<string> Referense = new List<string>();
@@ -108,8 +108,8 @@ namespace DS
                 }
             }
             return Referense;
-        }//оставить
-        public List<string> ReadQuestions()
+        }
+        private List<string> ReadQuestions()
         {
             List<List<char>> questions1 = new List<List<char>>();
             string Way = "scenarios" + ScenarioPapka + "DS.txt";
@@ -167,8 +167,8 @@ namespace DS
                 StringData = "";
             }
             return Questions;
-        }//оставить
-        public List<string> ReadInfoOfQuestions()
+        }
+        private List<string> ReadInfoOfQuestions()
         {
             string way = "scenarios" + ScenarioPapka + "transitions.txt";
             String StringData = "";
@@ -216,8 +216,8 @@ namespace DS
                 }
             }
             return InfoOfQuestions;
-        }//оставить
-        public List<List<string>> ReadCorrectAnswers()
+        }
+        private List<List<string>> ReadCorrectAnswers()
         {
             string way = "scenarios" + ScenarioPapka + "correctanswers.txt";
             String StringData = "";
@@ -285,9 +285,18 @@ namespace DS
                 answers = new List<string>();
             }
             return CorrectAnswers;
-        }//оставить
+        }
 
-        public void WriteScenario(string Name, List<string> Questions, List<string> Referense, List<string> CorrectAnswersForWrite, List<string> GraphForWrite, List<int> type_trans)
+        public void ReadDialog(Dialog Dialog)
+        {
+            Dialog.Questions = ReadQuestions();
+            Dialog.Referense = ReadReferense();
+            Dialog.InfoOfQuestions = ReadInfoOfQuestions();
+            Dialog.CorrectAnswers = ReadCorrectAnswers();
+            Dialog.IntGraph();
+        }
+
+        public void WriteDialog(string Name, List<string> Questions, List<string> Referense, List<string> CorrectAnswersForWrite, List<string> GraphForWrite, List<int> type_trans)
         {
             string way1 = "scenarios\\" + Name + "_correctanswers.txt";
             string way2 = "scenarios\\" + Name + "_DS.txt";
@@ -329,7 +338,7 @@ namespace DS
                 output4.Write("*");
             }
             output4.Close();
-        }//?????оставить
+        }
         public bool CreateNewScenarioFiles(string Name)
         {
             string path = "scenarios\\" + Name + ".txt";
@@ -365,6 +374,6 @@ namespace DS
 
             }
             return correct;
-        }//оставить
+        }
     }
 }

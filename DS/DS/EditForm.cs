@@ -30,7 +30,7 @@ namespace DS
 
         private void ReadData()
         {
-            Controller.ReadFiles();
+            Controller.ReadDialog();
         }
 
         private void OpenScenario()
