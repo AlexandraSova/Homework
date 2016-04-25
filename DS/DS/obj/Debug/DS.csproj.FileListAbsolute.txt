@@ -7,3 +7,6 @@ C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\De
 C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.csproj.GenerateResource.Cache
 C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.exe
 C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.pdb
+D:\Сухорученко\поликашин\DS\DS\bin\Debug\DS.exe.config
+D:\Сухорученко\поликашин\DS\DS\obj\Debug\DS.exe
+D:\Сухорученко\поликашин\DS\DS\obj\Debug\DS.pdb

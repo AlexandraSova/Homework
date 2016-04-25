@@ -11,6 +11,7 @@ namespace DS
         protected ProbabilityModel Model = new ProbabilityModel();//вероятностная модель
         protected GraphModel GraphModel = new GraphModel();//Графовая модель
         protected Dialog Dialog = new Dialog();
+        Client Client = new Client();
 
         public int Question;//номер текущего вопроса
         public int NextQuestion;//вопрос, на который перешли
@@ -133,6 +134,22 @@ namespace DS
 
             }
             return number;
+        }
+
+        public bool CheckClient(string Name,string PassWord)
+        {
+            bool b = true;
+            Client = Provider.SearchClient(Name, PassWord);
+            if (Client.name == null) b = false;
+            return b;
+        }
+
+        public bool NewClient(string Name,string PassWord)
+        {
+            bool b = true;
+            Client = Provider.NewClient(Name, PassWord);
+            if (Client.name == null) b = false;
+            return b;
         }
     }
 }

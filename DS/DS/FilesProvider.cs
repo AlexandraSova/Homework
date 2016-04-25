@@ -104,7 +104,7 @@ namespace DS
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Ошмбка!");
+                    MessageBox.Show("Ошибка!");
                 }
             }
             return Referense;
@@ -374,6 +374,79 @@ namespace DS
 
             }
             return correct;
+        }
+
+        public Client SearchClient(string Name, string Password)
+        {
+            string way = "clients\\clients.txt";
+            string[] DataOfClient;
+            Client Client = new Client();
+            bool b = false;
+            using (StreamReader sr = new StreamReader(@way, Encoding.Default))
+                    {
+                       while(!sr.EndOfStream)
+                       {
+                           string NextClient = sr.ReadLine();
+                           DataOfClient = NextClient.Split('|');
+                           if (Name==DataOfClient[0]&&Password==DataOfClient[1])
+                           {
+                               Client.name = DataOfClient[0];
+                               Client.password = DataOfClient[1];
+                               Client.all_tests = Convert.ToInt32(DataOfClient[2]);
+                               Client.last_test = Convert.ToInt32(DataOfClient[3]);
+                               b = true;
+                               break;
+                           }
+                       }
+                    }
+            if (b==false)
+            {
+                Client.name = null;
+                Client.password = null;
+                Client.all_tests = 0;
+                Client.last_test = 0;
+            }
+            return Client;     
+        }
+
+        public Client NewClient(string Name,string Password)
+        {
+            string way = "clients\\clients.txt";
+            string[] DataOfClient;
+            Client Client = new Client();
+            bool b = true;
+
+            using (StreamReader sr = new StreamReader(@way, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string NextClient = sr.ReadLine();
+                    DataOfClient = NextClient.Split('|');
+                    if (Name == DataOfClient[0] && Password == DataOfClient[1])
+                    {
+                        Client.name = null;
+                        Client.password = null;
+                        Client.all_tests = 0;
+                        Client.last_test = 0;
+                        b = false;
+                        break;
+                    }
+                }
+            }
+
+            if (b)
+            {
+                string Data = Name + "|" + Password + "|0|0";
+                using (StreamWriter sr = new StreamWriter(@way, true))
+                {
+                    sr.WriteLine(Data);
+                }
+                Client.name = Name;
+                Client.password = Password;
+                Client.all_tests = 0;
+                Client.last_test = 0;
+            }
+            return Client;
         }
     }
 }

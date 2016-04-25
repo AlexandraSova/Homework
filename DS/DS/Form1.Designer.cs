@@ -111,27 +111,29 @@
             // 
             // Create
             // 
-            this.Create.Location = new System.Drawing.Point(12, 245);
+            this.Create.Location = new System.Drawing.Point(457, 12);
             this.Create.Name = "Create";
             this.Create.Size = new System.Drawing.Size(120, 38);
             this.Create.TabIndex = 7;
             this.Create.Text = "Создать сценарий";
             this.Create.UseVisualStyleBackColor = true;
+            this.Create.Visible = false;
             this.Create.Click += new System.EventHandler(this.Create_Click);
             // 
             // Edit
             // 
-            this.Edit.Location = new System.Drawing.Point(138, 245);
+            this.Edit.Location = new System.Drawing.Point(457, 63);
             this.Edit.Name = "Edit";
             this.Edit.Size = new System.Drawing.Size(120, 38);
             this.Edit.TabIndex = 8;
             this.Edit.Text = "Редактировать сценарий";
             this.Edit.UseVisualStyleBackColor = true;
+            this.Edit.Visible = false;
             this.Edit.Click += new System.EventHandler(this.Edit_Click);
             // 
             // Record
             // 
-            this.Record.Location = new System.Drawing.Point(264, 245);
+            this.Record.Location = new System.Drawing.Point(15, 245);
             this.Record.Name = "Record";
             this.Record.Size = new System.Drawing.Size(120, 38);
             this.Record.TabIndex = 9;
@@ -214,7 +216,7 @@
             this.Controls.Add(this.QuestionText);
             this.Controls.Add(this.QuestionLabel);
             this.Name = "Form1";
-            this.Text = "Диалоговая система";
+            this.Text = "Тест";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Protocol)).EndInit();
             this.ResumeLayout(false);

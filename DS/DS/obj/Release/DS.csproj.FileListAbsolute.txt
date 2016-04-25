@@ -22,3 +22,4 @@ D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.ReferenseForm.
 D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.csproj.GenerateResource.Cache
 D:\Сухорученко\поликашин\DS\DS\bin\Release\DS.exe
 D:\Сухорученко\поликашин\DS\DS\bin\Release\DS.pdb
+D:\Сухорученко\поликашин\DS\DS\obj\Release\DS.HelloForm.resources
