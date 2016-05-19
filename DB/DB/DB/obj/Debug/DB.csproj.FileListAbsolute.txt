@@ -1,0 +1,9 @@
+D:\Сухорученко\БД\DB\DB\bin\Debug\DB.exe.config
+D:\Сухорученко\БД\DB\DB\bin\Debug\DB.exe
+D:\Сухорученко\БД\DB\DB\bin\Debug\DB.pdb
+D:\Сухорученко\БД\DB\DB\obj\Debug\DB.exe
+D:\Сухорученко\БД\DB\DB\obj\Debug\DB.pdb
+D:\Сухорученко\БД\DB\DB\obj\Debug\DB.csprojResolveAssemblyReference.cache
+G:\Сухорученко\БД\DB\DB\bin\Debug\DB.exe.config
+G:\Сухорученко\БД\DB\DB\obj\Debug\DB.exe
+G:\Сухорученко\БД\DB\DB\obj\Debug\DB.pdb
