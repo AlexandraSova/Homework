@@ -18,196 +18,141 @@ namespace DS
             InitializeComponent();
         }
 
+        Model.Message Question;//вопрос
         private string Answer;//ответ пользователя
-        private string ReturnAnswer()
+        private string RightAnswer;
+        private string SearchRightAnswer()
         {
-            return Answer;
+            string answer = "не определен";
+            if (Question.answer == null)
+            {
+                for (int i = 0; i < Question.answers.Count(); i++)
+                {
+                    if (Question.answers[i].IsTrue == true)
+                    {
+                        int number = i;
+                        answer = Question.answers[number].Text;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                answer = Question.answer;
+            }
+            return answer;
         }
-       
+        private bool End;
+
         Controller Controller = new Controller();
 
-        EditForm EditScenario;
-        CreateForm CreateScenario;
-
-        private int row_number = 0;//номер строки в протоколе
-
-        private void CorrectSearchFile(string answer)//Корректность нахождения пути к файлу файла
-        {
-            if (Controller.CorrectSearchFile(answer) == false)
-            {
-                Error.Text = "Ошибка!";
-                AnswerText.Text = "";
-            }
-            else
-            {
-                Referense.Visible = true;
-                AnswerText.Text = "";
-                Go();
-            }
-        }
-
-        private void ReadFiles()//корректность чтения инфы сценария
-        {
-            Controller.ReadDialog();
-        }
-
-        private void IntProtocol()//коррекция
-        {
-            for (int i = 0; i < Controller.N; i++)
-            {
-                Protocol.Rows.Add();
-                Protocol.AutoSizeRowsMode =
-       DataGridViewAutoSizeRowsMode.AllCells;
-            }
-        }
-
-        private void AskQuestion(string question)
+        private void QuestionInForm(string question_number, string question, bool has_image, string image)
         {
             QuestionText.Text = question;
+            QuestionLabel.Text = question_number;
+            //ждет адекватного представления изображения
+            /* if (has_image)
+             {
+                 Graphics g = Graphics.FromHwnd(this.Handle);
+                 g.DrawImage(Image.FromFile(@image), new Point(20, 0));
+             }*/
         }
 
-        public bool CorrectAnswer(int n)
+        private void AskQuestions()
         {
-            bool CorrectData = false;
-            Answer = AnswerText.Text;
-            CorrectData = Controller.CorrectAnswer(n, Answer);
-            if (CorrectData == false)
+            try
             {
-                Error.Text = "Извините, такого варианта ответа нет!";
-                AnswerText.Text = "";
+                Question = Controller.ReturnQuestion();
+                QuestionInForm(Question.QuestionNum, Question.Question, Question.HasImage, Question.Image);
             }
-            return CorrectData;
-        }
-
-        private void Protokol(string question, string answer, int n)
-        {
-            if (row_number == 0)
+            catch
             {
-                Protocol.Rows[0].Cells["quest"].Value = question;
-                Protocol.Rows[0].Cells["ans"].Value = answer;
-                row_number++;
-            }
-            else
-            {
-                Protocol.Rows[row_number].Cells["quest"].Value = question;
-                Protocol.Rows[row_number].Cells["ans"].Value = answer;
-                row_number++;
+                EndOfTest();
+                AnswerLabel.Visible = false;
+                AnswerText.Visible = false;
             }
         }
 
-        public void AskQuestions(int n, string answer)
+        private void EndOfTest()
         {
-            string[] Input = Controller.AskQuestions(n, answer);
-            if (Input[1]=="Close")
-            {
-                this.Close();
-            }
-            else
-            {
-                if(Input[2]=="Repeat")
-                {
-                    IntProtocol();
-                    AskQuestion(Input[0]);
-                }
-                else
-                {
-                    AskQuestion(Input[0]);
-                }
-            }
-        }
+            QuestionLabel.Text = "Поздравляю! Вы закончили тест!";
+            string NumberOfTests = "Всего вы прошли " + Controller.ClientNumberOfTests() + " тестов.";
+            string ThisTest = "Этот тест вы прошли с результатом " + Controller.ClientThisTest() + "%";
+            string LastTest = "А предыдущий - с результатом " + Controller.ClientLastTest() + "%";
+            string AllTests = "Общая статистика по всем тестам " + Controller.ClienAllTests() + "%";
 
-        private void Go()
-        {
-            Record.Visible = true;
-            Protocol.Visible = true;
-            DialogLabel.Text = "Ход диалога";
-            Error.Text = "";
-            ReferenseLabel.Text = "";
-            ReferenseText.Text = "";
-            QuestionLabel.Text = "Вопрос";
-            ReadFiles();
-            IntProtocol();
-            string question = Controller.Go();
-            AskQuestion(question);
+            QuestionText.Text = NumberOfTests + "\n" + ThisTest + "\n" + LastTest + "\n" + AllTests;
+            End = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            QuestionLabel.Text = "Запрос системы, необходимый для начала работы:";
-            QuestionText.Text = "Пожалуйста, введите сценарий,\nпо которому будем вести диалог.";
+            QuestionLabel.Text = "";
+            QuestionText.Text = "";
+            AnswerLabel.Visible = false;
+            AnswerText.Visible = false;
             Error.Text = "";
             ReferenseLabel.Text = "";
             ReferenseText.Text = "";
             Referense.Visible = false;
-            Referense.Visible = false;
-            DialogLabel.Text = "";
-            Protocol.Visible = false;
-            Record.Visible = false;
+            Ok.Visible = false;
+            End = false;
         }
 
-        private void Ok_Click(object sender, EventArgs e)//коррекция
+        private void Go_Click_1(object sender, EventArgs e)
         {
-            if (Controller.N==0)//коррекция
+            Controller.ReadDialog();
+            AnswerLabel.Visible = true;
+            AnswerText.Visible = true;
+            Referense.Visible = true;
+            Ok.Visible = true;
+            AskQuestions();
+            Go.Visible = false;
+            Create.Visible = false;
+        }
+
+        private void Ok_Click_1(object sender, EventArgs e)
+        {
+            if (!End)
             {
                 Answer = AnswerText.Text;
-                CorrectSearchFile(Answer);
+                bool right = false;
+                RightAnswer = SearchRightAnswer();
+                if (Answer == RightAnswer) right = true;
+                Controller.WriteAnswer(right);
+                Error.Text = "";
+                if (right)
+                {
+                    Error.Text = "Правильный ответ!";
+                }
+                else
+                {
+
+                    Error.Text = "Неправильный ответ! (правильный: " + RightAnswer + ")";
+                }
+                AskQuestions();
+                ReferenseLabel.Text = "";
+                ReferenseText.Text = "";
+                AnswerText.Text = "";
             }
             else
             {
-                Error.Text = "";
-                bool correct_answer = CorrectAnswer(Controller.Question);
-                string question = Controller.ReturnOneQuestion(Controller.Question);//коррекция
-                if (correct_answer)
-                {
-                    ReferenseLabel.Text = "";
-                    ReferenseText.Text = "";
-                    Answer = ReturnAnswer();
-                    Protokol(question, Answer, Controller.Question);
-                    AskQuestions(Controller.Question, Answer);
-                    AnswerText.Text = "";
-                    Controller.Question = Controller.NextQuestion;
-                }
+                Controller.SaveChanges();
+                this.Close();
             }
         }
 
-        private void Edit_Click(object sender, EventArgs e)
+        private void Referense_Click_1(object sender, EventArgs e)
         {
-            if (EditScenario == null || EditScenario.IsDisposed)
+            ReferenseLabel.Text = "Справка:";
+            if (Question.HasExplain)
             {
-                EditScenario = new EditForm();
-                EditScenario.Text = "Редактирование сценария";
-                EditScenario.Show();
+                ReferenseText.Text = Question.Explain;
             }
-        }
-
-        private void Create_Click(object sender, EventArgs e)
-        {
-            if (CreateScenario == null || CreateScenario.IsDisposed)
+            else
             {
-                CreateScenario = new CreateForm();
-                CreateScenario.Text = "Cоздание сценария";
-                CreateScenario.Show();
+                ReferenseText.Text = "Для данного вопроса нет подсказок.";
             }
-        }
-
-        private void Record_Click(object sender, EventArgs e)
-        {
-            int N_Rows = Protocol.Rows.Count;
-            string[] ques = new string[N_Rows];
-            string[] ans = new string[N_Rows];
-
-            for (int i = 0; i < N_Rows; i++)
-            {
-                ques[i] = Convert.ToString(Protocol.Rows[i].Cells[0].Value);
-                ans[i] = Convert.ToString(Protocol.Rows[i].Cells[1].Value);
-            }
-            Controller.Record(ques, ans);
-            MessageBox.Show("Ход диалога успешно задокументирован.");
-        }
-
-        private void Referense_Click(object sender, EventArgs e)//написать!
-        {
-
         }
     }
 }

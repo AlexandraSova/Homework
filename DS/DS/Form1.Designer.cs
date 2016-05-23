@@ -28,33 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.QuestionLabel = new System.Windows.Forms.Label();
-            this.QuestionText = new System.Windows.Forms.Label();
-            this.AnswerLabel = new System.Windows.Forms.Label();
-            this.AnswerText = new System.Windows.Forms.TextBox();
-            this.Error = new System.Windows.Forms.Label();
-            this.ReferenseLabel = new System.Windows.Forms.Label();
-            this.ReferenseText = new System.Windows.Forms.Label();
-            this.Create = new System.Windows.Forms.Button();
-            this.Edit = new System.Windows.Forms.Button();
-            this.Record = new System.Windows.Forms.Button();
-            this.Protocol = new System.Windows.Forms.DataGridView();
-            this.quest = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ans = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DialogLabel = new System.Windows.Forms.Label();
-            this.Referense = new System.Windows.Forms.Button();
+            this.Go = new System.Windows.Forms.Button();
             this.Ok = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Protocol)).BeginInit();
+            this.Referense = new System.Windows.Forms.Button();
+            this.ReferenseText = new System.Windows.Forms.Label();
+            this.ReferenseLabel = new System.Windows.Forms.Label();
+            this.Error = new System.Windows.Forms.Label();
+            this.AnswerText = new System.Windows.Forms.TextBox();
+            this.AnswerLabel = new System.Windows.Forms.Label();
+            this.QuestionText = new System.Windows.Forms.Label();
+            this.QuestionLabel = new System.Windows.Forms.Label();
+            this.Create = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // QuestionLabel
+            // Go
             // 
-            this.QuestionLabel.AutoSize = true;
-            this.QuestionLabel.Location = new System.Drawing.Point(12, 9);
-            this.QuestionLabel.Name = "QuestionLabel";
-            this.QuestionLabel.Size = new System.Drawing.Size(44, 13);
-            this.QuestionLabel.TabIndex = 0;
-            this.QuestionLabel.Text = "Вопрос";
+            this.Go.Location = new System.Drawing.Point(55, 164);
+            this.Go.Name = "Go";
+            this.Go.Size = new System.Drawing.Size(223, 79);
+            this.Go.TabIndex = 24;
+            this.Go.Text = "Пройти тест";
+            this.Go.UseVisualStyleBackColor = true;
+            this.Go.Click += new System.EventHandler(this.Go_Click_1);
+            // 
+            // Ok
+            // 
+            this.Ok.Location = new System.Drawing.Point(15, 295);
+            this.Ok.Name = "Ok";
+            this.Ok.Size = new System.Drawing.Size(117, 38);
+            this.Ok.TabIndex = 23;
+            this.Ok.Text = "Ok";
+            this.Ok.UseVisualStyleBackColor = true;
+            this.Ok.Click += new System.EventHandler(this.Ok_Click_1);
+            // 
+            // Referense
+            // 
+            this.Referense.Location = new System.Drawing.Point(138, 295);
+            this.Referense.Name = "Referense";
+            this.Referense.Size = new System.Drawing.Size(120, 38);
+            this.Referense.TabIndex = 22;
+            this.Referense.Text = "Подсказка";
+            this.Referense.UseVisualStyleBackColor = true;
+            this.Referense.Click += new System.EventHandler(this.Referense_Click_1);
+            // 
+            // ReferenseText
+            // 
+            this.ReferenseText.AutoSize = true;
+            this.ReferenseText.Location = new System.Drawing.Point(12, 406);
+            this.ReferenseText.Name = "ReferenseText";
+            this.ReferenseText.Size = new System.Drawing.Size(82, 13);
+            this.ReferenseText.TabIndex = 21;
+            this.ReferenseText.Text = "Текст справки";
+            // 
+            // ReferenseLabel
+            // 
+            this.ReferenseLabel.AutoSize = true;
+            this.ReferenseLabel.Location = new System.Drawing.Point(12, 383);
+            this.ReferenseLabel.Name = "ReferenseLabel";
+            this.ReferenseLabel.Size = new System.Drawing.Size(50, 13);
+            this.ReferenseLabel.TabIndex = 20;
+            this.ReferenseLabel.Text = "Справка";
+            // 
+            // Error
+            // 
+            this.Error.AutoSize = true;
+            this.Error.ForeColor = System.Drawing.Color.Maroon;
+            this.Error.Location = new System.Drawing.Point(12, 355);
+            this.Error.Name = "Error";
+            this.Error.Size = new System.Drawing.Size(47, 13);
+            this.Error.TabIndex = 19;
+            this.Error.Text = "Ошибка";
+            // 
+            // AnswerText
+            // 
+            this.AnswerText.Location = new System.Drawing.Point(15, 256);
+            this.AnswerText.Name = "AnswerText";
+            this.AnswerText.Size = new System.Drawing.Size(243, 20);
+            this.AnswerText.TabIndex = 18;
+            // 
+            // AnswerLabel
+            // 
+            this.AnswerLabel.AutoSize = true;
+            this.AnswerLabel.Location = new System.Drawing.Point(12, 230);
+            this.AnswerLabel.Name = "AnswerLabel";
+            this.AnswerLabel.Size = new System.Drawing.Size(37, 13);
+            this.AnswerLabel.TabIndex = 17;
+            this.AnswerLabel.Text = "Ответ";
             // 
             // QuestionText
             // 
@@ -62,152 +121,36 @@
             this.QuestionText.Location = new System.Drawing.Point(12, 34);
             this.QuestionText.Name = "QuestionText";
             this.QuestionText.Size = new System.Drawing.Size(82, 13);
-            this.QuestionText.TabIndex = 1;
+            this.QuestionText.TabIndex = 16;
             this.QuestionText.Text = "Текст вопроса";
             // 
-            // AnswerLabel
+            // QuestionLabel
             // 
-            this.AnswerLabel.AutoSize = true;
-            this.AnswerLabel.Location = new System.Drawing.Point(12, 88);
-            this.AnswerLabel.Name = "AnswerLabel";
-            this.AnswerLabel.Size = new System.Drawing.Size(37, 13);
-            this.AnswerLabel.TabIndex = 2;
-            this.AnswerLabel.Text = "Ответ";
-            // 
-            // AnswerText
-            // 
-            this.AnswerText.Location = new System.Drawing.Point(15, 104);
-            this.AnswerText.Name = "AnswerText";
-            this.AnswerText.Size = new System.Drawing.Size(243, 20);
-            this.AnswerText.TabIndex = 3;
-            // 
-            // Error
-            // 
-            this.Error.AutoSize = true;
-            this.Error.ForeColor = System.Drawing.Color.Maroon;
-            this.Error.Location = new System.Drawing.Point(12, 186);
-            this.Error.Name = "Error";
-            this.Error.Size = new System.Drawing.Size(47, 13);
-            this.Error.TabIndex = 4;
-            this.Error.Text = "Ошибка";
-            // 
-            // ReferenseLabel
-            // 
-            this.ReferenseLabel.AutoSize = true;
-            this.ReferenseLabel.Location = new System.Drawing.Point(12, 213);
-            this.ReferenseLabel.Name = "ReferenseLabel";
-            this.ReferenseLabel.Size = new System.Drawing.Size(50, 13);
-            this.ReferenseLabel.TabIndex = 5;
-            this.ReferenseLabel.Text = "Справка";
-            // 
-            // ReferenseText
-            // 
-            this.ReferenseText.AutoSize = true;
-            this.ReferenseText.Location = new System.Drawing.Point(10, 229);
-            this.ReferenseText.Name = "ReferenseText";
-            this.ReferenseText.Size = new System.Drawing.Size(82, 13);
-            this.ReferenseText.TabIndex = 6;
-            this.ReferenseText.Text = "Текст справки";
+            this.QuestionLabel.AutoSize = true;
+            this.QuestionLabel.Location = new System.Drawing.Point(12, 9);
+            this.QuestionLabel.Name = "QuestionLabel";
+            this.QuestionLabel.Size = new System.Drawing.Size(44, 13);
+            this.QuestionLabel.TabIndex = 15;
+            this.QuestionLabel.Text = "Вопрос";
             // 
             // Create
             // 
-            this.Create.Location = new System.Drawing.Point(457, 12);
+            this.Create.Location = new System.Drawing.Point(296, 164);
             this.Create.Name = "Create";
-            this.Create.Size = new System.Drawing.Size(120, 38);
-            this.Create.TabIndex = 7;
-            this.Create.Text = "Создать сценарий";
+            this.Create.Size = new System.Drawing.Size(223, 79);
+            this.Create.TabIndex = 25;
+            this.Create.Text = "Создать тест";
             this.Create.UseVisualStyleBackColor = true;
-            this.Create.Visible = false;
-            this.Create.Click += new System.EventHandler(this.Create_Click);
-            // 
-            // Edit
-            // 
-            this.Edit.Location = new System.Drawing.Point(457, 63);
-            this.Edit.Name = "Edit";
-            this.Edit.Size = new System.Drawing.Size(120, 38);
-            this.Edit.TabIndex = 8;
-            this.Edit.Text = "Редактировать сценарий";
-            this.Edit.UseVisualStyleBackColor = true;
-            this.Edit.Visible = false;
-            this.Edit.Click += new System.EventHandler(this.Edit_Click);
-            // 
-            // Record
-            // 
-            this.Record.Location = new System.Drawing.Point(15, 245);
-            this.Record.Name = "Record";
-            this.Record.Size = new System.Drawing.Size(120, 38);
-            this.Record.TabIndex = 9;
-            this.Record.Text = "Задокументировать ход диалога";
-            this.Record.UseVisualStyleBackColor = true;
-            this.Record.Click += new System.EventHandler(this.Record_Click);
-            // 
-            // Protocol
-            // 
-            this.Protocol.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Protocol.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.quest,
-            this.ans});
-            this.Protocol.Location = new System.Drawing.Point(12, 319);
-            this.Protocol.Name = "Protocol";
-            this.Protocol.ReadOnly = true;
-            this.Protocol.Size = new System.Drawing.Size(565, 120);
-            this.Protocol.TabIndex = 10;
-            // 
-            // quest
-            // 
-            this.quest.HeaderText = "Вопрос";
-            this.quest.Name = "quest";
-            this.quest.ReadOnly = true;
-            this.quest.Width = 400;
-            // 
-            // ans
-            // 
-            this.ans.HeaderText = "Ваш ответ";
-            this.ans.Name = "ans";
-            this.ans.ReadOnly = true;
-            this.ans.Width = 120;
-            // 
-            // DialogLabel
-            // 
-            this.DialogLabel.AutoSize = true;
-            this.DialogLabel.Location = new System.Drawing.Point(12, 303);
-            this.DialogLabel.Name = "DialogLabel";
-            this.DialogLabel.Size = new System.Drawing.Size(70, 13);
-            this.DialogLabel.TabIndex = 11;
-            this.DialogLabel.Text = "Ход диалога";
-            // 
-            // Referense
-            // 
-            this.Referense.Location = new System.Drawing.Point(138, 130);
-            this.Referense.Name = "Referense";
-            this.Referense.Size = new System.Drawing.Size(120, 38);
-            this.Referense.TabIndex = 12;
-            this.Referense.Text = "Справка";
-            this.Referense.UseVisualStyleBackColor = true;
-            this.Referense.Click += new System.EventHandler(this.Referense_Click);
-            // 
-            // Ok
-            // 
-            this.Ok.Location = new System.Drawing.Point(15, 130);
-            this.Ok.Name = "Ok";
-            this.Ok.Size = new System.Drawing.Size(117, 38);
-            this.Ok.TabIndex = 13;
-            this.Ok.Text = "Ok";
-            this.Ok.UseVisualStyleBackColor = true;
-            this.Ok.Click += new System.EventHandler(this.Ok_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 449);
+            this.Controls.Add(this.Create);
+            this.Controls.Add(this.Go);
             this.Controls.Add(this.Ok);
             this.Controls.Add(this.Referense);
-            this.Controls.Add(this.DialogLabel);
-            this.Controls.Add(this.Protocol);
-            this.Controls.Add(this.Record);
-            this.Controls.Add(this.Edit);
-            this.Controls.Add(this.Create);
             this.Controls.Add(this.ReferenseText);
             this.Controls.Add(this.ReferenseLabel);
             this.Controls.Add(this.Error);
@@ -218,7 +161,6 @@
             this.Name = "Form1";
             this.Text = "Тест";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.Protocol)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,22 +168,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Label QuestionLabel;
-        private System.Windows.Forms.Label QuestionText;
-        private System.Windows.Forms.Label AnswerLabel;
-        private System.Windows.Forms.TextBox AnswerText;
-        private System.Windows.Forms.Label Error;
-        private System.Windows.Forms.Label ReferenseLabel;
-        private System.Windows.Forms.Label ReferenseText;
-        private System.Windows.Forms.Button Create;
-        private System.Windows.Forms.Button Edit;
-        private System.Windows.Forms.Button Record;
-        private System.Windows.Forms.DataGridView Protocol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quest;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ans;
-        private System.Windows.Forms.Label DialogLabel;
-        private System.Windows.Forms.Button Referense;
+        private System.Windows.Forms.Button Go;
         private System.Windows.Forms.Button Ok;
+        private System.Windows.Forms.Button Referense;
+        private System.Windows.Forms.Label ReferenseText;
+        private System.Windows.Forms.Label ReferenseLabel;
+        private System.Windows.Forms.Label Error;
+        private System.Windows.Forms.TextBox AnswerText;
+        private System.Windows.Forms.Label AnswerLabel;
+        private System.Windows.Forms.Label QuestionText;
+        private System.Windows.Forms.Label QuestionLabel;
+        private System.Windows.Forms.Button Create;
+
 
     }
 }

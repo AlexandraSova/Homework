@@ -12,5 +12,6 @@ namespace DS
         public string password;
         public int all_tests;
         public int last_test;
+        public int number_of_tests;
     }
 }

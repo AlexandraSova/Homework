@@ -7,149 +7,81 @@ namespace DS
 {
     class Controller
     {
-        protected FilesProvider Provider = new FilesProvider();//работа с файлами
-        protected ProbabilityModel Model = new ProbabilityModel();//вероятностная модель
-        protected GraphModel GraphModel = new GraphModel();//Графовая модель
-        protected Dialog Dialog = new Dialog();
+        FilesProvider Provider = new FilesProvider();//работа с файлами
+        Dialog Dialog = new Dialog();
         Client Client = new Client();
+        string Name;
+        string Pass;
+        int last;
+        int all;
+        int number;
 
-        public int Question;//номер текущего вопроса
-        public int NextQuestion;//вопрос, на который перешли
-        protected string Scenario;//текущий сценарий
-
-        public int N;
-
-        public bool CorrectSearchFile(string answer)//Корректность нахождения пути к файлу
-        {
-            bool b;
-            if (Provider.SearchFile(answer) == false)
-            {
-                b = false;
-            }
-            else
-            {
-                b = true;
-                Scenario = answer;
-            }
-            return b;
-        }
+        ProbabilityModel ProbabilityModel;//вероятностная модель выбора следующего вопроса
+        int RightAnswers = 0;
 
         public void ReadDialog()
         {
             Provider.ReadDialog(Dialog);
-            N = Dialog.Questions.Count();
+            ProbabilityModel = new ProbabilityModel(Dialog.Question.Count());
         }
 
-        public bool CorrectAnswer(int n, string answer)//корректность ответа пользователя
+        public Model.Message ReturnQuestion()
         {
-            bool CorrectData = false;
-            List<string> CorrectAnswer = Dialog.CorrectAnswers[n];
-            for (int i = 0; i < CorrectAnswer.Count(); i++)
-            {
-                if (CorrectAnswer[i] != "%")
-                {
-                    if (CorrectAnswer[i] == answer)
-                    {
-                        CorrectData = true;
-                        break;
-                    }
-                }
-                else
-                {
-                    CorrectData = true;
-                }
-            }
-            return CorrectData;
-        }
-
-        public string[] AskQuestions(int n, string answer)
-        {
-            List<string> next_questions = Dialog.Graph[n];
-            string[] Output = new string[3];
-            string question = " ";
-            Output[0] = question;
-            Output[1] = " ";
-            Output[2] = " ";
-            if (Dialog.type_trans[n] == 0)
-            {
-                Output[1] = "Close";
-            }
-
-            else
-            {
-                string next_one_question = Model.Select(Dialog.type_trans[n], next_questions, answer, Dialog.Graph);
-                Random rnd = new Random();
-                NextQuestion = SearchDSQuestion(next_one_question);
-
-                if (NextQuestion != 1)
-                {
-                    question = Dialog.ReturnOneQuestion(NextQuestion);
-                    Output[0] = question;
-                }
-                else
-                {
-                    Dialog.Graph = new List<List<string>>();
-                    Dialog.IntGraph();
-                    ///IntProtocol();
-                    question = Dialog.ReturnOneQuestion(NextQuestion);
-                    Output[0] = question;
-                    Output[2] = "Repeat";
-                }
-            }
+            int n = ProbabilityModel.Select();
+            Model.Message Output = Dialog.ReturnOneQuestion(n);
             return Output;
         }
 
-        public string Go()
+        public bool CheckClient(string Name, string PassWord)
         {
-            string question = Dialog.ReturnOneQuestion(1);
-            Question = 1;
-            return question;
-        }
-
-        public void Record(string[] q, string[] a)
-        {
-            Provider.WriteProtocol(q, a);
-        }
-
-        public string ReturnOneQuestion(int x)
-        {
-            string question = Dialog.ReturnOneQuestion(x);
-            return question;
-        }
-
-        private int SearchDSQuestion(string question)
-        {
-            int number = 0;
-            bool serach = false;
-            for (int i = 0; i < Dialog.Graph.Count(); i++)
-            {
-                if (question == Dialog.Questions[i])
-                {
-                    number = i;
-                    serach = true;
-                }
-            }
-            if (serach == false)
-            {
-
-            }
-            return number;
-        }
-
-        public bool CheckClient(string Name,string PassWord)
-        {
-            bool b = true;
-            Client = Provider.SearchClient(Name, PassWord);
-            if (Client.name == null) b = false;
+            bool b = Provider.SearchClient(Client, Name, PassWord);
+            Name = Client.name;
+            Pass = Client.password;
+            last = Client.last_test;
+            all = Client.all_tests;
+            number = Client.number_of_tests;
             return b;
         }
 
-        public bool NewClient(string Name,string PassWord)
+        public bool NewClient(string Name, string PassWord)
         {
             bool b = true;
             Client = Provider.NewClient(Name, PassWord);
             if (Client.name == null) b = false;
             return b;
+        }
+
+        public void WriteAnswer(bool right)
+        {
+            if (right) { RightAnswers++; }
+        }
+
+        public int ClientLastTest()
+        {
+            return Client.last_test;
+        }
+
+        public int ClientThisTest()
+        {
+            return (RightAnswers / Dialog.Question.Count()) * 100;
+        }
+
+        public int ClienAllTests()
+        {
+            return (ClientThisTest() + Client.all_tests) / 2;
+        }
+
+        public int ClientNumberOfTests()
+        {
+            return Client.number_of_tests;
+        }
+
+        public void SaveChanges()
+        {
+            Client.all_tests = (ClientThisTest() + Client.all_tests) / 2;
+            Client.last_test = (RightAnswers / Dialog.Question.Count()) * 100;
+            Client.number_of_tests++;
+            Provider.SaveChanges(Client);
         }
     }
 }
