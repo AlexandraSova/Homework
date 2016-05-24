@@ -5,17 +5,11 @@ using System.Text;
 
 namespace DS
 {
-    class Controller
+    public class Controller
     {
         FilesProvider Provider = new FilesProvider();//работа с файлами
-        Dialog Dialog = new Dialog();
         Client Client = new Client();
-        string Name;
-        string Pass;
-        int last;
-        int all;
-        int number;
-
+        Dialog Dialog = new Dialog();
         ProbabilityModel ProbabilityModel;//вероятностная модель выбора следующего вопроса
         int RightAnswers = 0;
 
@@ -34,26 +28,54 @@ namespace DS
 
         public bool CheckClient(string Name, string PassWord)
         {
-            bool b = Provider.SearchClient(Client, Name, PassWord);
-            Name = Client.name;
-            Pass = Client.password;
-            last = Client.last_test;
-            all = Client.all_tests;
-            number = Client.number_of_tests;
-            return b;
+            Client = Provider.SearchClient(Name, PassWord);
+            if (Client.name == null) return false;
+            else return true;
         }
 
         public bool NewClient(string Name, string PassWord)
         {
-            bool b = true;
             Client = Provider.NewClient(Name, PassWord);
-            if (Client.name == null) b = false;
-            return b;
+            if (Client.name == null) return false;
+            else return true;
         }
 
         public void WriteAnswer(bool right)
         {
             if (right) { RightAnswers++; }
+        }
+
+        public List<string> ReturnRightAnswer(Model.Message Question)
+        {
+            List<string> answer = new List<string>();
+            if (Question.HasAnswers==null)
+            {
+                for (int i = 0; i < Question.answers.Count(); i++)
+                {
+                    if (Question.answers[i].IsTrue == true)
+                    {
+                        int number = i;
+                        answer.Add(Question.answers[number].Text);
+                    }
+                }
+            }
+            else
+            {
+                if (Question.answer == null) answer.Add("не определен");
+                else answer.Add(Question.answer);
+            }
+            
+            return answer;
+        }
+
+        public string RightAnswerToString(List<string> RightAnswer)
+        {
+            string RightAnswer1 = "";
+            for (int i = 0; i < RightAnswer.Count() - 1; i++)
+            {
+                RightAnswer1 = RightAnswer1 + ", ";
+            }
+            return RightAnswer1 = RightAnswer1 + RightAnswer.Last();
         }
 
         public int ClientLastTest()

@@ -19,37 +19,27 @@ namespace DS
         }
 
         Model.Message Question;//вопрос
-        private string Answer;//ответ пользователя
-        private string RightAnswer;
-        private string SearchRightAnswer()
-        {
-            string answer = "не определен";
-            if (Question.answer == null)
-            {
-                for (int i = 0; i < Question.answers.Count(); i++)
-                {
-                    if (Question.answers[i].IsTrue == true)
-                    {
-                        int number = i;
-                        answer = Question.answers[number].Text;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                answer = Question.answer;
-            }
-            return answer;
-        }
+        
+        HelloForm HelloForm;
         private bool End;
 
         Controller Controller = new Controller();
 
-        private void QuestionInForm(string question_number, string question, bool has_image, string image)
+        private void QuestionInForm(Model.Message Question)
         {
-            QuestionText.Text = question;
-            QuestionLabel.Text = question_number;
+            string QuestionAll = Question.Question + "\n\n";
+            if (Question.HasAnswers)
+            {
+                string Answers = "Варианты ответов:\n";
+                for (int i = 0; i < Question.answers.Count();i++ )
+                {
+                    Answers = Answers + Question.answers[i].Text + "\n";
+                }
+                QuestionAll = QuestionAll + Answers+"\n\nВведите ответы без пробелов через точку запятой.";
+            }
+            QuestionLabel.Text = Question.QuestionNum;
+            QuestionText.Text = QuestionAll;
+            
             //ждет адекватного представления изображения
             /* if (has_image)
              {
@@ -63,7 +53,7 @@ namespace DS
             try
             {
                 Question = Controller.ReturnQuestion();
-                QuestionInForm(Question.QuestionNum, Question.Question, Question.HasImage, Question.Image);
+                QuestionInForm(Question);
             }
             catch
             {
@@ -96,7 +86,13 @@ namespace DS
             ReferenseText.Text = "";
             Referense.Visible = false;
             Ok.Visible = false;
+            if (HelloForm == null || HelloForm.IsDisposed)
+            {
+                HelloForm = new HelloForm(this,Controller);
+                HelloForm.Show();
+            }
             End = false;
+            this.AcceptButton = Ok;
         }
 
         private void Go_Click_1(object sender, EventArgs e)
@@ -115,20 +111,22 @@ namespace DS
         {
             if (!End)
             {
-                Answer = AnswerText.Text;
+                string Answer = AnswerText.Text;
                 bool right = false;
-                RightAnswer = SearchRightAnswer();
-                if (Answer == RightAnswer) right = true;
+                List<string> RightAnswer = Controller.ReturnRightAnswer(Question);
+                string[] Answer1 = Answer.Split(';');
+                
+                if (Answer1 == RightAnswer.ToArray()) right = true;
                 Controller.WriteAnswer(right);
                 Error.Text = "";
+                string StringRightAnswer = Controller.RightAnswerToString(RightAnswer);
                 if (right)
                 {
                     Error.Text = "Правильный ответ!";
                 }
                 else
                 {
-
-                    Error.Text = "Неправильный ответ! (правильный: " + RightAnswer + ")";
+                    Error.Text = "Неправильный ответ! (правильный: " + StringRightAnswer + ")";
                 }
                 AskQuestions();
                 ReferenseLabel.Text = "";

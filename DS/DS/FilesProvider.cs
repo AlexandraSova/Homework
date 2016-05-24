@@ -45,11 +45,11 @@ namespace DS
             }
         }
 
-        public bool SearchClient(Client Client, string Name, string Password)
+        public Client SearchClient(string Name, string Password)
         {
             string way = "clients\\clients.txt";
             string[] DataOfClient;
-            bool b = false;
+            Client Client = new Client();
             using (StreamReader sr = new StreamReader(@way))
             {
                 while (!sr.EndOfStream)
@@ -63,13 +63,11 @@ namespace DS
                         Client.all_tests = Convert.ToInt32(DataOfClient[2]);
                         Client.last_test = Convert.ToInt32(DataOfClient[3]);
                         Client.number_of_tests = Convert.ToInt32(DataOfClient[4]);
-                        b = true;
                         break;
                     }
                 }
             }
-            
-            return b;
+            return Client;
         }
 
         public Client NewClient(string Name, string Password)
@@ -87,11 +85,6 @@ namespace DS
                     DataOfClient = NextClient.Split('|');
                     if (Name == DataOfClient[0] && Password == DataOfClient[1])
                     {
-                        Client.name = null;
-                        Client.password = null;
-                        Client.all_tests = 0;
-                        Client.last_test = 0;
-                        Client.number_of_tests = 0;
                         b = false;
                         break;
                     }
@@ -132,7 +125,7 @@ namespace DS
                 if(Client.name==DataOfClient[0] && Client.password==DataOfClient[1])
                 {
                     Clients.RemoveAt(i);
-                    Clients.Add(StringClient);
+                    Clients.Insert(0, StringClient);//чтобы частые клиены были наверху
                 }
             }
             using (StreamWriter sw = new StreamWriter(@way))

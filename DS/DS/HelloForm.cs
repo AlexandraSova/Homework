@@ -12,13 +12,17 @@ namespace DS
 {
     public partial class HelloForm : Form
     {
-        public HelloForm()
+        public HelloForm(Form1 form, Controller controller)
         {
+            this.Controller = controller;
+            this.Form = form;
+            Form.Enabled = false;
+            this.TopMost = true;
             InitializeComponent();
         }
 
-        Controller Controller = new Controller();
-        Form1 Test;
+        Controller Controller;
+        Form1 Form;
 
         private void HelloForm_Load(object sender, EventArgs e)
         {
@@ -29,12 +33,14 @@ namespace DS
         private void registation_Click(object sender, EventArgs e)
         {
             View(true);
+            this.AcceptButton = Ok1;
             Ok1.Visible = true;
         }
 
         private void login_Click(object sender, EventArgs e)
         {
             View(true);
+            this.AcceptButton = Ok;
             Ok1.Visible = false;
         }
 
@@ -53,12 +59,8 @@ namespace DS
         {
             if(Controller.CheckClient(NameText.Text, PassText.Text))
             {
-                if (Test == null || Test.IsDisposed)
-                {
-                    Test = new Form1();
-                    Test.Show();
-                    this.Visible = false;
-                }
+                Form.Enabled = true;
+                this.Close();
             }
             else
             {
@@ -72,12 +74,8 @@ namespace DS
         {
             if (Controller.NewClient(NameText.Text, PassText.Text))
             {
-                if (Test == null || Test.IsDisposed)
-                {
-                    Test = new Form1();
-                    Test.Show();
-                    this.Visible = false;
-                }
+                Form.Enabled = true;
+                this.Close();
             }
             else
             {
