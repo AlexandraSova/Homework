@@ -9,34 +9,35 @@ namespace DS
 {
     class FilesProvider
     {
+        private int TestNumber;
+
         public void ReadDialog(Dialog Dialog)
         {
-            Model.Message model = new Model.Message("", "", true, "", true, "", "");
-            model = model.GetFirst();
+            Model.Message model= Model.Message.GetFirst(out TestNumber);
             Dialog.QuestionNum.Add(model.QuestionNum);
             Dialog.Question.Add(model.Question);
             Dialog.HasImage.Add(model.HasImage);
             Dialog.Image.Add(model.Image);
             Dialog.HasExplain.Add(model.HasExplain);
             Dialog.Explain.Add(model.Explain);
+            Dialog.HasAnswers.Add(model.HasAnswers);
             Dialog.answers.Add(model.answers);
             Dialog.answer.Add(model.answer);
 
-            int i = 1;
             while (true)
             {
                 try
                 {
-                    model = model.GetNext(i);
+                    model = Model.Message.GetNext(TestNumber, 0);
                     Dialog.QuestionNum.Add(model.QuestionNum);
                     Dialog.Question.Add(model.Question);
                     Dialog.HasImage.Add(model.HasImage);
                     Dialog.Image.Add(model.Image);
                     Dialog.HasExplain.Add(model.HasExplain);
                     Dialog.Explain.Add(model.Explain);
+                    Dialog.HasAnswers.Add(model.HasAnswers);
                     Dialog.answers.Add(model.answers);
                     Dialog.answer.Add(model.answer);
-                    i++;
                 }
                 catch
                 {
@@ -110,19 +111,19 @@ namespace DS
         public void SaveChanges(Client Client)
         {
             string way = "clients\\clients.txt";
-            string StringClient=Client.name+"|"+Client.password+"|"+Client.all_tests+"|"+Client.last_test+"|"+Client.number_of_tests;
+            string StringClient = Client.name + "|" + Client.password + "|" + Client.all_tests + "|" + Client.last_test + "|" + Client.number_of_tests;
             List<string> Clients = new List<string>();
             using (StreamReader sr = new StreamReader(@way))
             {
                 while (!sr.EndOfStream)
                 {
-                    Clients.Add(sr.ReadLine());                    
+                    Clients.Add(sr.ReadLine());
                 }
             }
-            for (int i=0;i<Clients.Count();i++)
+            for (int i = 0; i < Clients.Count(); i++)
             {
                 string[] DataOfClient = Clients[i].Split('|');
-                if(Client.name==DataOfClient[0] && Client.password==DataOfClient[1])
+                if (Client.name == DataOfClient[0] && Client.password == DataOfClient[1])
                 {
                     Clients.RemoveAt(i);
                     Clients.Insert(0, StringClient);//чтобы частые клиены были наверху
@@ -130,7 +131,7 @@ namespace DS
             }
             using (StreamWriter sw = new StreamWriter(@way))
             {
-                for(int i=0;i<Clients.Count();i++)
+                for (int i = 0; i < Clients.Count(); i++)
                 {
                     sw.WriteLine(Clients[i]);
                 }

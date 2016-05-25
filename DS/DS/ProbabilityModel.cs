@@ -8,11 +8,12 @@ namespace DS
 {
     class ProbabilityModel
     {
+
         List<int> NumbersForSelect;
         public ProbabilityModel(int n)
         {
             NumbersForSelect = new List<int>();
-            for(int i=0;i<n;i++)
+            for (int i = 0; i < n; i++)
             {
                 NumbersForSelect.Add(i);
             }
@@ -21,12 +22,18 @@ namespace DS
         public int Select()
         {
             int Output = 0;
+            int i = 0;
             Random rnd = new Random();
-            Output = rnd.Next(0, NumbersForSelect.Count() - 1);
-            Output = NumbersForSelect[Output];
+            int x = NumbersForSelect.Count() - 1;
+            if (x == 0)
+            i = 0;
+            else
+            i = rnd.Next(0, x);
+
+            Output = NumbersForSelect[i];
             if (NumbersForSelect.Count() > 1)
             {
-                NumbersForSelect.RemoveAt(Output);
+                NumbersForSelect.RemoveAt(i);
             }
             else
             {

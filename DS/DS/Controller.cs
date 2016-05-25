@@ -8,8 +8,8 @@ namespace DS
     public class Controller
     {
         FilesProvider Provider = new FilesProvider();//работа с файлами
-        Client Client = new Client();
         Dialog Dialog = new Dialog();
+        Client Client = new Client();
         ProbabilityModel ProbabilityModel;//вероятностная модель выбора следующего вопроса
         int RightAnswers = 0;
 
@@ -35,9 +35,10 @@ namespace DS
 
         public bool NewClient(string Name, string PassWord)
         {
+            bool b = true;
             Client = Provider.NewClient(Name, PassWord);
-            if (Client.name == null) return false;
-            else return true;
+            if (Client.name == null) b = false;
+            return b;
         }
 
         public void WriteAnswer(bool right)
@@ -48,7 +49,7 @@ namespace DS
         public List<string> ReturnRightAnswer(Model.Message Question)
         {
             List<string> answer = new List<string>();
-            if (Question.HasAnswers==null)
+            if (Question.HasAnswers)
             {
                 for (int i = 0; i < Question.answers.Count(); i++)
                 {
@@ -58,13 +59,13 @@ namespace DS
                         answer.Add(Question.answers[number].Text);
                     }
                 }
+                if (answer.Count() == 0) answer.Add("не определен");
             }
             else
             {
                 if (Question.answer == null) answer.Add("не определен");
                 else answer.Add(Question.answer);
             }
-            
             return answer;
         }
 

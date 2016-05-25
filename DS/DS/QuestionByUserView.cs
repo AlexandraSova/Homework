@@ -16,7 +16,7 @@ namespace DS
     {
         bool NEW = true;
         bool CanSimpleViewed = true;
-
+        int CurrentQuuestion = 0;
         //TODO СДЕЛАТЬ, наконец
         // быть может стоит вынести сохранение в другой класс. УТОЧНИТЬ 
         // и вообще много чего вынести в контроллер, слишком толстое представление
@@ -91,11 +91,11 @@ namespace DS
                         else
                             Cell2[z] = "false";
                     }
-                    SourceBox.Text += Memory.Save(QuestionNum.Text, QuestionBox.Text, ImageDirectoryBox.Text, ExplanationBox.Text, Cell1, Cell2);
+                    SourceBox.Text += Memory.Save(CurrentQuuestion, QuestionNum.Text, QuestionBox.Text, ImageDirectoryBox.Text, ExplanationBox.Text, Cell1, Cell2);
                 }
                 else
-                    SourceBox.Text += Memory.Save(QuestionNum.Text, QuestionBox.Text, ImageDirectoryBox.Text, ExplanationBox.Text, CorrectAnswerBox.Text);
-
+                    SourceBox.Text += Memory.Save(CurrentQuuestion, QuestionNum.Text, QuestionBox.Text, ImageDirectoryBox.Text, ExplanationBox.Text, CorrectAnswerBox.Text);
+                CurrentQuuestion++;
                 Clean();
             }
 
@@ -136,13 +136,13 @@ namespace DS
         {
 
             if (SourceBox.Text.Length != 0&& SourceBox.Visible)
-                Memory.Save(SourceBox.Text);
+                Memory.Save(CurrentQuuestion, SourceBox.Text);
             else
             {
                 if (QuestionBox.Text.Length != 0)
                     NextQuestion_Click(sender, e);
             }
-            Memory.SaveFile();
+            Memory.SaveFile(CurrentQuuestion);
             this.Close();
         }
 

@@ -12,7 +12,7 @@ using System.Threading;
 namespace DS
 {
 
-  /*  class QuestionsSourceController
+    class QuestionsSourceController
     {
         static QuestionByUserController ByHandsController;
         static QuestionFromSiteController FromSiteController;
@@ -22,12 +22,10 @@ namespace DS
 
         int[][] History; //возможно понадобится
         static int CurrentQuestion = 0;
-        [STAThread]
-        public static void Main()
+
+        public QuestionsSourceController()
         {
             model = new Model();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             view = new QuestionsSourceView();
 
             EventHandler ByHands = new System.EventHandler(ByHands_Click);
@@ -36,7 +34,7 @@ namespace DS
             EventHandler Settings = new System.EventHandler(Settings_Click);
             EventHandler About = new System.EventHandler(About_Click);
             view.Prepare(ByHands, FromSite, BaseEditor, Settings, About);
-            Application.Run(view);
+            view.Show();
         }
 
         private static void About_Click(object sender, EventArgs e)
@@ -82,5 +80,5 @@ namespace DS
             //Form f = new QuestionByUserView();
             //f.Show();
         }
-    }*/
+    }
 }

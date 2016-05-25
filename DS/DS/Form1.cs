@@ -19,11 +19,9 @@ namespace DS
         }
 
         Model.Message Question;//вопрос
-        
-        HelloForm HelloForm;
         private bool End;
-
         Controller Controller = new Controller();
+        HelloForm HelloForm;
 
         private void QuestionInForm(Model.Message Question)
         {
@@ -31,15 +29,15 @@ namespace DS
             if (Question.HasAnswers)
             {
                 string Answers = "Варианты ответов:\n";
-                for (int i = 0; i < Question.answers.Count();i++ )
+                for (int i = 0; i < Question.answers.Count(); i++)
                 {
                     Answers = Answers + Question.answers[i].Text + "\n";
                 }
-                QuestionAll = QuestionAll + Answers+"\n\nВведите ответы без пробелов через точку запятой.";
+                QuestionAll = QuestionAll + Answers + "\n\nВведите ответы без пробелов через точку запятой.";
             }
             QuestionLabel.Text = Question.QuestionNum;
             QuestionText.Text = QuestionAll;
-            
+
             //ждет адекватного представления изображения
             /* if (has_image)
              {
@@ -88,7 +86,7 @@ namespace DS
             Ok.Visible = false;
             if (HelloForm == null || HelloForm.IsDisposed)
             {
-                HelloForm = new HelloForm(this,Controller);
+                HelloForm = new HelloForm(this, Controller);
                 HelloForm.Show();
             }
             End = false;
@@ -115,8 +113,13 @@ namespace DS
                 bool right = false;
                 List<string> RightAnswer = Controller.ReturnRightAnswer(Question);
                 string[] Answer1 = Answer.Split(';');
-                
-                if (Answer1 == RightAnswer.ToArray()) right = true;
+
+                for (int i = 0; i < RightAnswer.Count();i++)
+                {
+                    if (Answer1[i] == RightAnswer[i]) right = true;
+                    else right = false;
+                }
+                   
                 Controller.WriteAnswer(right);
                 Error.Text = "";
                 string StringRightAnswer = Controller.RightAnswerToString(RightAnswer);
@@ -142,6 +145,7 @@ namespace DS
 
         private void Referense_Click_1(object sender, EventArgs e)
         {
+
             ReferenseLabel.Text = "Справка:";
             if (Question.HasExplain)
             {
@@ -151,6 +155,11 @@ namespace DS
             {
                 ReferenseText.Text = "Для данного вопроса нет подсказок.";
             }
+        }
+
+        private void Create_Click(object sender, EventArgs e)
+        {
+            QuestionsSourceController C = new QuestionsSourceController();
         }
     }
 }

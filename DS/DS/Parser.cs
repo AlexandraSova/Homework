@@ -93,9 +93,74 @@ namespace DS
             return Questions;
         }
 
-      //  public static List<Model> ParsePage(string website)
-       // {
+        private void ParsePage(int NumOf, string website, out  List<string> Question, out List<string> Explain, out List<string> Answers)
+        {
+            WebClient webClient = new WebClient();
+            string page = webClient.DownloadString(website);
 
-       // }
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(page);
+            // HtmlAgilityPack.HtmlNode
+            //string
+            Question = doc.DocumentNode.SelectNodes("//div[@class='prob_maindiv nobreak']")
+                .Select(t => t.InnerText)
+                .ToList();
+
+            Explain = doc.DocumentNode.SelectNodes("//div[@class='nobreak solution']")
+                .Select(span => span.InnerText)
+                .ToList();
+            Answers = doc.DocumentNode.SelectNodes("//div[@class='answer']")
+                .Select(span => span.InnerText)
+                .ToList();
+
+
+            for (int i = 0; i < Question.Count; i++)
+            {
+                int div = 0;
+
+                var fromEncodind = Encoding.GetEncoding("windows-1251");//из какой кодировки
+                var bytes = fromEncodind.GetBytes(Question[i]);
+                var toEncoding = Encoding.UTF8;//в какую кодировку
+                Question[i] = toEncoding.GetString(bytes);
+                Question[i] = Question[i].Remove(Question[i].IndexOf("Ответ: "));
+                Question[i] = Question[i].Replace("&shy;", "");
+                Question[i] = Question[i].Replace("&nbsp;", " ");
+                Question[i] = Question[i].Replace("(1)", '\n' + "(1)");
+
+                //richTextBox1.Text += Question[i] + '\n' + '\n' + '\n';
+            }
+
+
+            for (int i = 0; i < Explain.Count; i++)
+            {
+                var fromEncodind = Encoding.GetEncoding("windows-1251");//из какой кодировки
+                var bytes = fromEncodind.GetBytes(Explain[i]);
+                var toEncoding = Encoding.UTF8;//в какую кодировку
+                Explain[i] = toEncoding.GetString(bytes);
+                Explain[i] = Explain[i].Replace("&shy;", "");
+                Explain[i] = Explain[i].Replace("&nbsp;", " ");
+               // richTextBox1.Text += Explain[i] + '\n' + '\n' + '\n';
+
+            }
+            for (int i = 0; i < Answers.Count; i++)
+            {
+                var fromEncodind = Encoding.GetEncoding("windows-1251");//из какой кодировки
+                var bytes = fromEncodind.GetBytes(Answers[i]);
+                var toEncoding = Encoding.UTF8;//в какую кодировку
+                Answers[i] = toEncoding.GetString(bytes);
+                Answers[i] = Answers[i].Replace("&shy;", "");
+                Answers[i] = Answers[i].Replace("&nbsp;", " ");
+                Answers[i] = Answers[i].Replace("Ответ: ", " ");
+                try
+                {
+                    Answers[i] = Answers[i].Remove(Answers[i].IndexOf('|')).Trim();
+                }
+                catch { }
+               // richTextBox1.Text += Answers[i] + '\n' + '\n' + '\n';
+
+            }
+            
+
+        }
     }
 }

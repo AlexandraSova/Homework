@@ -43,7 +43,7 @@
             // 
             // Go
             // 
-            this.Go.Location = new System.Drawing.Point(55, 164);
+            this.Go.Location = new System.Drawing.Point(35, 164);
             this.Go.Name = "Go";
             this.Go.Size = new System.Drawing.Size(223, 79);
             this.Go.TabIndex = 24;
@@ -135,12 +135,13 @@
             // 
             // Create
             // 
-            this.Create.Location = new System.Drawing.Point(296, 164);
+            this.Create.Location = new System.Drawing.Point(292, 164);
             this.Create.Name = "Create";
             this.Create.Size = new System.Drawing.Size(223, 79);
             this.Create.TabIndex = 25;
             this.Create.Text = "Создать тест";
             this.Create.UseVisualStyleBackColor = true;
+            this.Create.Click += new System.EventHandler(this.Create_Click);
             // 
             // Form1
             // 

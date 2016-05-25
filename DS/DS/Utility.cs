@@ -6,28 +6,7 @@ using System.Threading.Tasks;
 
 namespace DS
 {
-    public class Pair
-    {
-        internal int x { get; set; }
-        internal int y { get; set; }
-        public Pair(int X, int Y)
-        {
-            x = X;
-            y = Y;
-        }
-    }
-    public class Trio
-    {
-        internal int x { get; set; }
-        internal int y { get; set; }
-        internal int z { get; set; }
-        public Trio(int X, int Y, int Z)
-        {
-            x = X;
-            y = Y;
-            z = Z;
-        }
-    }
+    
     public class HrefModel
     {
         public class type

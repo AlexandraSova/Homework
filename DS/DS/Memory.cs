@@ -13,10 +13,11 @@ namespace DS
 {
     public class Memory
     {
-        static StreamReader sR;
-        static StreamWriter sW;
-        static string Text = "";
-        public static string Save(string _QuestionNum,
+        static List<StreamReader> sR = new List<StreamReader>();
+        static List<StreamWriter> sW = new List<StreamWriter>();
+        static List<string> Text = new List<string>();
+        public static string Save(int i,
+                                string _QuestionNum,
                                 string _Question,
                                 string _Image,
                                 string _Explain,
@@ -31,19 +32,19 @@ namespace DS
 
 
             //QuestionNum
-            Text += _QuestionNum;
-            Text += ';';
+            Text[i] += _QuestionNum;
+            Text[i] += ';';
             //Question
-            Text += _Question;
-            Text += ';';
+            Text[i] += _Question;
+            Text[i] += ';';
             //HasAnswers
-            Text += "true";
-            Text += ';';
+            Text[i] += "true";
+            Text[i] += ';';
             //Answers@IsTrue#
             for (int z = 0; z < _answers.Length - 1; z++)
             {
                 if (z != 0)
-                    Text += '#';//Переход
+                    Text[i] += '#';//Переход
                 string a;
                 if (Convert.ToString(_IsTrue) == "Да")
                 {
@@ -54,34 +55,35 @@ namespace DS
 
                 if (_answers[z].Length != 0 && a.Length != 0)
                 {
-                    Text += _answers[z] + '@'; //Ответ
-                    Text += a;
+                    Text[i] += _answers[z] + '@'; //Ответ
+                    Text[i] += a;
                 }
             }
-            Text += ';';
+            Text[i] += ';';
             //HasExplain
             if (_Explain.Length == 0)
-                Text += "false";
+                Text[i] += "false";
             else
-                Text += "true";
-            Text += ';';
+                Text[i] += "true";
+            Text[i] += ';';
             //Explain
-            Text += _Explain;
-            Text += ';';
+            Text[i] += _Explain;
+            Text[i] += ';';
             //HasImage
             if (_Image.Length != 0)
-                Text += "true";
+                Text[i] += "true";
             else
-                Text += "false";
-            Text += ';';
+                Text[i] += "false";
+            Text[i] += ';';
             //Image
-            Text += _Image;
-            Text += ';';
-            Text += '\n';
-            //sW.WriteLine(Text);
-            return Text;
+            Text[i] += _Image;
+            Text[i] += ';';
+            Text[i] += '\n';
+            //sW[i].WriteLine(Text[i]);
+            return Text[i];
         }
-        public static string Save(string _QuestionNum,
+        public static string Save(int i,
+                        string _QuestionNum,
                         string _Question,
                         string _Image,
                         string _Explain,
@@ -94,49 +96,49 @@ namespace DS
             //Вообще структура имеет вид конечного детерменированного автомата без циклов
 
             //QuestionNum
-            Text += _QuestionNum;
-            Text += ';';
+            Text[i] += _QuestionNum;
+            Text[i] += ';';
             //Question
-            Text += _Question;
-            Text += ';';
+            Text[i] += _Question;
+            Text[i] += ';';
             //HasAnswers
-            Text += "false";
-            Text += ';';
+            Text[i] += "false";
+            Text[i] += ';';
             //Answer
-            Text += _answer;
-            Text += ';';
+            Text[i] += _answer;
+            Text[i] += ';';
             //HasExplain
             if (_Explain.Length == 0)
-                Text += "false";
+                Text[i] += "false";
             else
-                Text += "true";
-            Text += ';';
+                Text[i] += "true";
+            Text[i] += ';';
             //Explain
-            Text += _Explain;
-            Text += ';';
+            Text[i] += _Explain;
+            Text[i] += ';';
             //HasImage
             if (_Image.Length != 0)
-                Text += "true";
+                Text[i] += "true";
             else
-                Text += "false";
-            Text += ';';
+                Text[i] += "false";
+            Text[i] += ';';
             //Image
-            Text += _Image;
-            Text += ';';
-            Text += '\n';
-            //sW.WriteLine(Text);
-            return Text;
+            Text[i] += _Image;
+            Text[i] += ';';
+            Text[i] += '\n';
+            //sW[i].WriteLine(Text[i]);
+            return Text[i];
         }
-        public static string Save(string _Text)
+        public static string Save(int i, string _Text)
         {
 
             //QuestionNum
-            Text += _Text;
+            Text[i] += _Text[i];
 
-            //sW.WriteLine(Text);
-            return Text;
+            //sW[i].WriteLine(Text[i]);
+            return Text[i];
         }
-        public static void SaveFile()
+        public static void SaveFile(int i)
         {
 
             try
@@ -147,10 +149,10 @@ namespace DS
 
                 if (SaveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    sW = new StreamWriter(SaveFileDialog1.FileName);
-                    
-                    sW.WriteLine(Text);
-                    sW.Close();
+                    sW.Add(new StreamWriter(SaveFileDialog1.FileName));
+
+                    sW[i].WriteLine(Text[i]);
+                    sW[i].Close();
                 }
             }
             catch (Exception ex)
@@ -159,11 +161,11 @@ namespace DS
             }
 
 
-            //sR = new StreamReader(@"C:\Users\iampi\Documents\test1.kur");
+            //sR[i] = new StreamReader(@"C:\Users\iampi\Documents\test1.kur");
         }
-        public static void LoadFile()
+        public static void LoadFile(out int i)
         {
-           
+            i = sR.Count();
             try
             {
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -172,25 +174,25 @@ namespace DS
 
                 if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    sR = new StreamReader(openFileDialog1.FileName, Encoding.Default);
+                    sR.Add(new StreamReader(openFileDialog1.FileName, Encoding.UTF8));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
             }
-            
-            //sR = new StreamReader(@"C:\Users\iampi\OneDrive\Polikashin2016\ResuEgeParser\test2.kur");
-            //sR = new StreamReader(@"C:\Users\iampi\Documents\test.kur");
+
+            //sR[i] = new StreamReader(@"C:\Users\iampi\OneDrive\Polikashin2016\ResuEgeParser\test2.kur");
+            //sR[i] = new StreamReader(@"C:\Users\iampi\Documents\test.kur");
         }
 
-        public static Model.Message GetMessage(int skip)
+        public static Model.Message GetMessage(int FileNum, int skip)
         {
             string[] str = null;
             Model.Message m = null;
             for (int i = 0; i < skip + 1; i++)
             {
-                str = sR.ReadLine().Split(';');//??
+                str = sR[FileNum].ReadLine().Split(';');//??
             }
 
             //      Варианты вопросов
@@ -230,9 +232,9 @@ namespace DS
                 return new Model.Message(str[0], str[1], Convert.ToBoolean(str[4]), str[5], Convert.ToBoolean(str[6]), str[7], str[3]);
             }
         }
-        public static bool EOF()
+        public static bool EOF(int i)
         {
-            return sR.EndOfStream;
+            return sR[i].EndOfStream;
         }
     }
 }

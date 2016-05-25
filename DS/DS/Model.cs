@@ -84,25 +84,25 @@ namespace DS
             }
 
 
-            public Message GetFirst()
+            public static Message GetFirst(out int i)
             {
-                Memory.LoadFile();
-                return GetNext(0);
+                i = 0;
+                Memory.LoadFile(out i);
+
+                return GetNext(i, 0);
 
             }
 
-            public Message GetNext(int skip)
+            public static Message GetNext(int FileNum, int skip)
             {
-                Message m = Memory.GetMessage(skip);
-                if (m != null)
+                    Message m = Memory.GetMessage(FileNum, skip);
+                    //а что если первого нет?
                     return m;
-                else return m;
-                //а что если первого нет?
             }
 
-            public bool EOF()
+            public bool EOF(int i)
             {
-                return Memory.EOF();
+                return Memory.EOF(i);
             }
 
         }

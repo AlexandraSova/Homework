@@ -28,6 +28,7 @@ namespace DS
         {
             View(false);
             Ok1.Visible = false;
+            PassText.PasswordChar = '☻';
         }
 
         private void registation_Click(object sender, EventArgs e)

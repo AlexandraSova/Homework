@@ -13,6 +13,7 @@ namespace DS
         public List<string> Image = new List<string>();
         public List<bool> HasExplain = new List<bool>();
         public List<string> Explain = new List<string>();
+        public List<bool> HasAnswers = new List<bool>();
         public List<Model.Message.Answer[]> answers = new List<Model.Message.Answer[]>();
         public List<string> answer = new List<string>();
 
@@ -25,6 +26,7 @@ namespace DS
             Output.Image = this.Image[i];
             Output.HasExplain = this.HasExplain[i];
             Output.Explain = this.Explain[i];
+            Output.HasAnswers = this.HasAnswers[i];
             Output.answers = this.answers[i];
             Output.answer = this.answer[i];
 
