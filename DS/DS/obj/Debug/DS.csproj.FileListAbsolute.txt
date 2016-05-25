@@ -1,0 +1,12 @@
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\bin\Debug\DS.exe.config
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\bin\Debug\DS.exe
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\bin\Debug\DS.pdb
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.csprojResolveAssemblyReference.cache
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.Form1.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.Properties.Resources.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.csproj.GenerateResource.Cache
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.exe
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\DS\DS\obj\Debug\DS.pdb
+D:\Сухорученко\поликашин\DS\DS\bin\Debug\DS.exe.config
+D:\Сухорученко\поликашин\DS\DS\obj\Debug\DS.exe
+D:\Сухорученко\поликашин\DS\DS\obj\Debug\DS.pdb
