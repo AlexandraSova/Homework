@@ -1,0 +1,119 @@
+CREATE TABLE address
+(
+  address_id serial NOT NULL,
+  country character varying(100),
+  region character varying(100),
+  city character varying(100),
+  house character varying(10),
+  flat character varying(10),
+  index character varying(10),
+  CONSTRAINT pk_address_id PRIMARY KEY (address_id)
+)
+
+CREATE TABLE client
+(
+  client_id serial NOT NULL,
+  name name,
+  birthday date,
+  phone character varying(25),
+  manager_id bigint,
+  address_id bigint,
+  CONSTRAINT pk_client_id PRIMARY KEY (client_id),
+  CONSTRAINT fk_address_id FOREIGN KEY (address_id)
+      REFERENCES address (address_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_manager_id FOREIGN KEY (manager_id)
+      REFERENCES manager (manager_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE manager
+(
+  manager_id serial NOT NULL,
+  name name,
+  birthday date,
+  phone character varying(25),
+  address_id bigint,
+  CONSTRAINT pk_manager_id PRIMARY KEY (manager_id),
+  CONSTRAINT fk_address_id FOREIGN KEY (address_id)
+      REFERENCES address (address_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE "order"
+(
+  order_id serial NOT NULL,
+  start date,
+  finish date,
+  manager_id bigint,
+  client_id bigint,
+  CONSTRAINT pk_order_id PRIMARY KEY (order_id),
+  CONSTRAINT fk_client_id FOREIGN KEY (client_id)
+      REFERENCES client (client_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_manager_id FOREIGN KEY (manager_id)
+      REFERENCES manager (manager_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE item
+(
+  order_id bigint,
+  product_id bigint,
+  amount integer,
+  CONSTRAINT fk_order_id FOREIGN KEY (order_id)
+      REFERENCES "order" (order_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_product_id FOREIGN KEY (product_id)
+      REFERENCES product (product_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+
+CREATE TABLE type
+(
+  type_id serial NOT NULL,
+  name character varying(100),
+  CONSTRAINT pk_type_id PRIMARY KEY (type_id)
+)
+
+CREATE TABLE comment
+(
+  comment_id serial NOT NULL,
+  text text,
+  CONSTRAINT pk_comment_id PRIMARY KEY (comment_id)
+)
+
+CREATE TABLE product
+(
+  product_id serial NOT NULL,
+  name character varying(1000),
+  price numeric,
+  colour character varying(100),
+  type_id bigint,
+  amount integer,
+  material character varying(100),
+  print character varying,
+  comment_id bigint,
+  description text,
+  CONSTRAINT pk_product_id PRIMARY KEY (product_id),
+  CONSTRAINT fk_comment_id FOREIGN KEY (comment_id)
+      REFERENCES comment (comment_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_type_id FOREIGN KEY (type_id)
+      REFERENCES type (type_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE skirt
+(
+  product_id bigint,
+  size character varying(10),
+  length integer,
+  waist integer,
+  silhouette character varying(100),
+  hip integer,
+  CONSTRAINT fk_product_id FOREIGN KEY (product_id)
+      REFERENCES product (product_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
