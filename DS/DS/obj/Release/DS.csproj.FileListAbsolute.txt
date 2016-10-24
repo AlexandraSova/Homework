@@ -45,3 +45,6 @@ D:\Сухорученко\поликашин\обновленная\DS\DS\bin\Re
 D:\Сухорученко\поликашин\обновленная\DS\DS\bin\Release\HtmlAgilityPack.dll
 D:\Сухорученко\поликашин\обновленная\DS\DS\bin\Release\HtmlAgilityPack.pdb
 D:\Сухорученко\поликашин\обновленная\DS\DS\bin\Release\HtmlAgilityPack.xml
+C:\Users\Александра\Documents\GitHub\Homework\DS\DS\bin\Release\DS.exe.config
+C:\Users\Александра\Documents\GitHub\Homework\DS\DS\obj\Release\DS.exe
+C:\Users\Александра\Documents\GitHub\Homework\DS\DS\obj\Release\DS.pdb
