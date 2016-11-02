@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="97f53d7f-e58c-483f-9fc5-f947f9ee563f" name="Activity1" linkedPackageId="67ab4411-b413-4d68-b6f5-d2121b7fc953" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="360a99a6-c430-4591-913f-6d92835e2bc8">
+      <elementDefinition Id="00edfb80-3fdb-4f64-a445-af96248ab34e" />
+      <body>Click to OK</body>
+    </comment>
+    <comment Id="90ede083-e7be-4803-9653-bbd88bffc6f5">
+      <elementDefinition Id="822575ab-4d3e-427a-9899-f8e8004c3f18" />
+      <body>submit</body>
+    </comment>
+    <comment Id="99122b2f-a862-43e1-b5a3-40fd9e95c43a">
+      <elementDefinition Id="d13ba830-e349-45ee-868c-467430a709ee" />
+      <body>_view.Show()</body>
+    </comment>
+    <comment Id="2d768bd5-2680-4c3a-9b67-47c9e06c17b6">
+      <elementDefinition Id="2008ff2f-7cb7-4e3c-8f97-7634dd321026" />
+      <body>_view.Close()</body>
+    </comment>
+    <comment Id="6357bf31-f74d-4a9c-aea2-89d60b2945c3">
+      <elementDefinition Id="803e3978-f2a3-43d9-a6ae-88fbe727a403" />
+      <body>[correct]/WriteData</body>
+    </comment>
+    <comment Id="7b822e73-cfaa-4ad7-bc7d-35acc429a6dc">
+      <elementDefinition Id="9cd8fb1c-35ff-47a9-a386-2e53ac6f78a0" />
+      <body>[not correct]/ShowError</body>
+    </comment>
+    <comment Id="111c1b84-f4a8-415e-bf6d-9103dec87615">
+      <elementDefinition Id="d47bdea5-ff3d-4c96-ac94-c28a49c43c32" />
+      <body>refresh fields</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="fb5875d1-1f10-4eba-8525-ee0fd1609cdf">
+      <profileInstance Id="0de0ce78-6afc-43ef-a8a4-b62a2275f2cb" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="15e90ae5-8154-44a5-9bbe-e9233d8a8e04">
+      <profileInstance Id="d6af8b85-9ed0-478d-bcb0-247d324b8921" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="a9945253-8de8-4263-a66e-a61e76892e4f" name="Activity1" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="898dd201-d06b-4e0f-9e51-153ae2784add" />
+        <nodes>
+          <initialNode Id="d5370d2a-1e77-4608-95c7-905d4945b699" name="Initial1" isLeaf="false">
+            <elementDefinition Id="8ca42065-2e5f-46e4-a3f2-632ca5dff78c" />
+            <flowNodeTargets>
+              <controlFlow Id="d22ae7b9-caa3-4b66-80ea-0a7c1d6b0b80" isLeaf="false">
+                <opaqueActionMoniker Id="bbda394e-805d-4286-b6b7-84c5d5b022e5" LastKnownName="GettingData" />
+                <elementDefinition Id="0e103065-efd8-4e67-b626-f363bf307dcc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <activityFinalNode Id="299343e3-6c8c-4772-b5eb-a43f22e07aa5" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="b1c0ae12-2ea3-4450-8d2d-7f8d48676d91" />
+          </activityFinalNode>
+          <opaqueAction Id="bbda394e-805d-4286-b6b7-84c5d5b022e5" name="GettingData" isLeaf="false">
+            <elementDefinition Id="b5e515c6-27df-4ef2-b98f-5cea9f5e74b7" />
+            <flowNodeTargets>
+              <controlFlow Id="22a28efb-9676-4e96-9a87-a8d7dbae0aed" isLeaf="false">
+                <opaqueActionMoniker Id="4e06c975-1d45-44a6-a884-c499fa259c94" LastKnownName="CheckData" />
+                <elementDefinition Id="e808ce8f-a17f-4677-bfbc-9c70f7fa97ab" />
+              </controlFlow>
+              <controlFlow Id="9e64a3b9-1be3-43ad-8860-b808510154de" isLeaf="false">
+                <opaqueActionMoniker Id="bbda394e-805d-4286-b6b7-84c5d5b022e5" LastKnownName="GettingData" />
+                <elementDefinition Id="a70a80f8-f017-4e58-aa7d-8058913f86bd" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="4e06c975-1d45-44a6-a884-c499fa259c94" name="CheckData" isLeaf="false">
+            <elementDefinition Id="0a94c75e-36c8-4e39-bb6a-b75cf37b00f4" />
+            <flowNodeTargets>
+              <controlFlow Id="01f7de61-b9c5-4105-a476-76a68b03ebc9" isLeaf="false">
+                <opaqueActionMoniker Id="865860a0-95c7-4491-a535-3bc159288d4d" LastKnownName="Rejecting" />
+                <elementDefinition Id="656e2d97-2867-4170-a7e1-1483a81a1079" />
+              </controlFlow>
+              <controlFlow Id="b5f0ec9c-22de-4dc6-a1ae-f37288df2c92" isLeaf="false">
+                <opaqueActionMoniker Id="2eb0d384-ab7d-482f-92ac-c3eab076f78f" LastKnownName="CheckIn" />
+                <elementDefinition Id="1b479608-94df-4e86-8476-83bcc9c2222a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="2eb0d384-ab7d-482f-92ac-c3eab076f78f" name="CheckIn" isLeaf="false">
+            <elementDefinition Id="2cf9deab-4e26-49e7-a85b-287f26703ea8" />
+            <flowNodeTargets>
+              <controlFlow Id="e28c1eff-8380-4422-96f3-0edb5668eba6" isLeaf="false">
+                <activityFinalNodeMoniker Id="299343e3-6c8c-4772-b5eb-a43f22e07aa5" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="ede10539-a7b4-4474-bdd0-7a64b28dfe48" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="865860a0-95c7-4491-a535-3bc159288d4d" name="Rejecting" isLeaf="false">
+            <elementDefinition Id="f3716d99-0c13-423d-9cee-7bbd21910908" />
+            <flowNodeTargets>
+              <controlFlow Id="81758342-b559-48ce-aebd-c01af78e4fe2" isLeaf="false">
+                <opaqueActionMoniker Id="bbda394e-805d-4286-b6b7-84c5d5b022e5" LastKnownName="GettingData" />
+                <elementDefinition Id="7d14cc41-699f-41fa-afbf-fb34970a2c4d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="67ab4411-b413-4d68-b6f5-d2121b7fc953" name="ModelingProject3">
+    <elementDefinition Id="5bfb0aaf-6535-4a08-abe7-e09523269426" />
+  </package>
+</activityRootModel>

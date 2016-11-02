@@ -1,0 +1,38 @@
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\CheckIn.exe.config
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\CheckIn.exe
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\CheckIn.pdb
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\Mono.Security.dll
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\Npgsql.pdb
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\Npgsql.xml
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\de\Npgsql.resources.dll
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\es\Npgsql.resources.dll
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\fi\Npgsql.resources.dll
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\fr\Npgsql.resources.dll
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\ja\Npgsql.resources.dll
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\bin\Debug\zh-CN\Npgsql.resources.dll
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.csprojResolveAssemblyReference.cache
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.Properties.Resources.resources
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.csproj.GenerateResource.Cache
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.exe
+c:\users\александра\documents\visual studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.pdb
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\CheckIn.exe.config
+D:\Сухорученко\3 курс\CheckIn\CheckIn\obj\Debug\CheckIn.exe
+D:\Сухорученко\3 курс\CheckIn\CheckIn\obj\Debug\CheckIn.pdb
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\CheckIn.exe
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\CheckIn.pdb
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\Mono.Security.dll
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\Npgsql.pdb
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\Npgsql.xml
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\de\Npgsql.resources.dll
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\es\Npgsql.resources.dll
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\fi\Npgsql.resources.dll
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\fr\Npgsql.resources.dll
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\ja\Npgsql.resources.dll
+D:\Сухорученко\3 курс\CheckIn\CheckIn\bin\Debug\zh-CN\Npgsql.resources.dll
+D:\Сухорученко\3 курс\CheckIn\CheckIn\obj\Debug\CheckIn.csprojResolveAssemblyReference.cache
+D:\Сухорученко\3 курс\CheckIn\CheckIn\obj\Debug\CheckIn.MainForm.resources
+D:\Сухорученко\3 курс\CheckIn\CheckIn\obj\Debug\CheckIn.Properties.Resources.resources
+D:\Сухорученко\3 курс\CheckIn\CheckIn\obj\Debug\CheckIn.csproj.GenerateResource.Cache
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.CheckInForm.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.PatientForm.resources
+C:\Users\Александра\Documents\Visual Studio 2013\Projects\CheckIn\CheckIn\obj\Debug\CheckIn.Patient.ChangeForm.resources

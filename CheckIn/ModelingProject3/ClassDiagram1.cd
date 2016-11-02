@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CheckIn.CheckInForm" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <Members>
+      <Method Name="CheckInForm" Hidden="true" />
+      <Field Name="CheckPass" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="Form1_Load" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Method Name="label3_Click" Hidden="true" />
+      <Field Name="lastname_label" Hidden="true" />
+      <Field Name="name_label" Hidden="true" />
+      <Method Name="name_TextChanged" Hidden="true" />
+      <Field Name="ok" Hidden="true" />
+      <Method Name="ok_Click" Hidden="true" />
+      <Field Name="pass1_label" Hidden="true" />
+      <Field Name="pass2_label" Hidden="true" />
+      <Method Name="pass2_TextChanged" Hidden="true" />
+      <Method Name="pass2_VisibleChanged" Hidden="true" />
+      <Property Name="Property" Hidden="true" />
+      <Method Name="Show" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AYEAAESCAChAAAAAEDaAAIQWAAAEAAAgAAQAARAAAQk=</HashCode>
+      <FileName>CheckInForm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.12" />
+  </Class>
+  <Class Name="CheckIn.Presenter" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="CheckPass" Hidden="true" />
+      <Method Name="Presenter" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAACAAAAAIAAI=</HashCode>
+      <FileName>CheckInPresenter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CheckIn.Model">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="HaveMail" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AKAAAAAAAAAAAAAAACAAAAAAAQAAAAAEAAAAAAEAAAA=</HashCode>
+      <FileName>Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckIn.Program">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckIn.Provider">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <Members>
+      <Method Name="HaveMail" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAIAAAAAAAAA=</HashCode>
+      <FileName>Provider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckIn.Properties.Resources" Collapsed="true">
+    <Position X="10.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckIn.Properties.Settings" Collapsed="true">
+    <Position X="10.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="CheckIn.IPresenter">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Interface\IPresenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CheckIn.Interface.ICheckInView">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAEAAAABAAAAAAAYAAAAQAAAAAAAAAAAAAQAAAAg=</HashCode>
+      <FileName>Interface\ICheckInView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CheckIn.Interface.IView">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Interface\IView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
