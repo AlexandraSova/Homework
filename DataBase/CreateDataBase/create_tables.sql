@@ -33,15 +33,15 @@ CREATE TABLE client
   CONSTRAINT pk_client_id PRIMARY KEY (id),
   
   CONSTRAINT fk_address_id FOREIGN KEY (address_id) REFERENCES address (id) MATCH SIMPLE
-      ON UPDATE NO ACTION 
+      ON UPDATE CASCADE
       ON DELETE RESTRICT,
       
   CONSTRAINT fk_manager_id FOREIGN KEY (manager_id)REFERENCES manager (id) MATCH SIMPLE
-      ON UPDATE NO ACTION 
-      ON DELETE SET NULL
+      ON UPDATE CASCADE 
+      ON DELETE NO ACTION
 );
 
-CREATE TABLE "order"
+CREATE TABLE order
 (
   id serial NOT NULL,
   start date NOT NULL,
@@ -51,11 +51,11 @@ CREATE TABLE "order"
   CONSTRAINT pk_order_id PRIMARY KEY (id),
   
   CONSTRAINT fk_client_id FOREIGN KEY (client_id) REFERENCES client (id) MATCH SIMPLE
-      ON UPDATE NO ACTION 
+      ON UPDATE CASCADE 
       ON DELETE CASCADE,
       
   CONSTRAINT fk_manager_id FOREIGN KEY (manager_id) REFERENCES manager (id) MATCH SIMPLE
-      ON UPDATE NO ACTION 
+      ON UPDATE CASCADE 
       ON DELETE NO ACTION
 );
 
@@ -82,8 +82,8 @@ CREATE TABLE product
   CONSTRAINT pk_product_id PRIMARY KEY (id),
   
   CONSTRAINT fk_type_id FOREIGN KEY (type_id) REFERENCES type (id) MATCH SIMPLE
-      ON UPDATE NO ACTION 
-      ON DELETE NO ACTION
+      ON UPDATE CASCADE 
+      ON DELETE RESTRICT
 );
 
 CREATE TABLE item
@@ -95,8 +95,8 @@ CREATE TABLE item
   
   CONSTRAINT pk_item_id PRIMARY KEY (id),
   
-  CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES "order" (id) MATCH SIMPLE
-      ON UPDATE NO ACTION 
+  CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES order (id) MATCH SIMPLE
+      ON UPDATE CASCADE
       ON DELETE CASCADE,
       
   CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (id) MATCH SIMPLE
