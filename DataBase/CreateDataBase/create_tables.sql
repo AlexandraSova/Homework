@@ -70,7 +70,7 @@ CREATE TABLE product
 (
   id serial NOT NULL,
   name character varying(1000) NOT NULL,
-  price numeric NOT NULL,
+  price numeric NOT NULL CHECK (price>0),
   colour character varying(100),
   type_id bigint,
   amount integer,
