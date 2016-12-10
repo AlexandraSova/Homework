@@ -17,5 +17,21 @@ namespace OnlineShopRestServer.Models
         public string print { get; set; }
         public string description { get; set; }
         public string characteristics { get; set; }
+
+        public override Dictionary<string, System.Type> GetFieldsTypes()
+        {
+            Dictionary<string, System.Type> result = new Dictionary<string, System.Type>();
+            result.Add("id", typeof(int));
+            result.Add("name", typeof(string));
+            result.Add("price", typeof(double));
+            result.Add("colour", colour.GetType());
+            result.Add("type_id", typeof(int));
+            result.Add("amount", typeof(int));
+            result.Add("material", typeof(string));
+            result.Add("print", typeof(string));
+            result.Add("description", typeof(string));
+            result.Add("characteristics", typeof(string));
+            return result;
+        }
     }
 }

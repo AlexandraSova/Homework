@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Microsoft.Extensions.Primitives;
+using Npgsql;
 using OnlineShopRestServer.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,33 @@ namespace OnlineShopRestServer
             connection.Open();
         }
 
+        public List<Dictionary<string, object>> SelectByFilter(string table_name, List<KeyValuePair<string, StringValues>> filter)
+        {
+            string command_text = "SELECT * FROM " + table_name + " WHERE ";
+            List<string> values_pars = new List<string>();
+            Model model = (Model)Activator.CreateInstance(TypeMap.GetTableType(table_name));
+            Dictionary<string, System.Type> type_map = model.GetFieldsTypes();
+
+            for (int i = 0; i < filter.Count(); i++)
+            {
+                System.Type type;
+                type_map.TryGetValue(filter[i].Key, out type);
+
+                if (type == typeof(string))
+                {
+                    values_pars.Add(filter[i].Key + " = '" + filter[i].Value.ToString() + "'");
+                }
+                else
+                {
+                    values_pars.Add(filter[i].Key + " = " + filter[i].Value.ToString());
+                }
+                
+            }
+            //create full command text
+            command_text = command_text + String.Join(" and ", values_pars);
+
+            return Select(command_text);
+        }
         public List<Dictionary<string, object>> Select(string command_text)
         {
             List<Dictionary<string, object>> result = new List<Dictionary<string, object>>();
@@ -42,22 +70,27 @@ namespace OnlineShopRestServer
             }
             return result;
         }
-        public void Update(string table, string where, Model model)
+
+        public Model Update(string table, string where, Model model)
         {
-            string command_text = "update " + table + " set " + UpdateData(ConvertModel(model)) + " where " + where + ";";
+            Model result = null;
+            string command_text = "update " + table + " set " + UpdateData(ConvertModelToDictionary(model)) + " where " + where + ";";
             try
             {
                 NpgsqlCommand command = new NpgsqlCommand(command_text, connection);
                 command.ExecuteNonQuery();
+                result = model;
             }
             finally
             {
                 connection.Close();
             }
+            return model;
         }
-        public int Insert(string table, Model model)
+        public Dictionary<string,object> Insert(string table, Model model)
         {
-            string command_text = "insert into " + table + InsertData(ConvertModel(model)) + " SELECT currval('" + table + "_id_seq');";
+            Dictionary<string, object> result = null;
+            string command_text = "insert into " + table + InsertData(ConvertModelToDictionary(model)) + " SELECT currval('" + table + "_id_seq');";
             int insert_id = -1;
             try
             {
@@ -65,12 +98,14 @@ namespace OnlineShopRestServer
                 NpgsqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 insert_id = Convert.ToInt32(reader[0]);
+                result = ConvertModelToDictionary(model);
+                result["id"] = insert_id;
             }
             finally
             {
                 connection.Close();
             }
-            return insert_id;
+            return result;
         }
         public void Delete(string table, string where)
         {
@@ -90,7 +125,7 @@ namespace OnlineShopRestServer
             }
         }
 
-        private Dictionary<string, object> ConvertModel(Model model)
+        private Dictionary<string, object> ConvertModelToDictionary(Model model)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
 
@@ -134,7 +169,6 @@ namespace OnlineShopRestServer
 
             return result;
         }
-
         private string UpdateData(Dictionary<string, object> model)
         {
             model.Remove("id");
