@@ -21,7 +21,7 @@ namespace OnlineShopRestServer.Controllers
         // GET api/client
         // GET api/client/?manager_id=2&address_id=1
         [HttpGet("{table}")]
-        public JsonResult Get(string table)
+        public IActionResult Get(string table)
         {
             data_base = new DataBase(server, port, user, password, database);
             try
@@ -33,24 +33,24 @@ namespace OnlineShopRestServer.Controllers
 
                 return Json(data_base.Select("select * from " + table));
             }
-            catch
+            catch(Npgsql.PostgresException)
             {
-                return Json("Ошибка");
+                return StatusCode(400);
             }
         }
 
         // GET api/client/2
         [HttpGet("{table}/{id:int}")]
-        public JsonResult Get(string table, int id)
+        public IActionResult Get(string table, int id)
         {
             data_base = new DataBase(server, port, user, password, database);
             try
             {
                 return Json(data_base.Select("select * from " + table + " where id = '" + id.ToString() + "'"));
             }
-            catch
+            catch(Npgsql.PostgresException)
             {
-                return Json("Ошибка");
+                return StatusCode(400);
             }
         }
 
@@ -63,9 +63,9 @@ namespace OnlineShopRestServer.Controllers
             {
                 return Json(data_base.Select("SELECT * FROM " + subTable + " WHERE " + TypeMap.GetTableFK(table) + "=" + id.ToString()));
             }
-            catch
+            catch(Npgsql.PostgresException)
             {
-                return Json("Ошибка");
+                return StatusCode(400);
             }
         }
 
@@ -74,8 +74,15 @@ namespace OnlineShopRestServer.Controllers
         public JsonResult Post(string table, [FromBody] JObject data)
         {
             data_base = new DataBase(server, port, user, password, database);
-            Model model = (Model)data.ToObject(TypeMap.GetTableType(table));
-            return Json(data_base.Insert(table, model));
+            try
+            {
+                Model model = (Model)data.ToObject(TypeMap.GetTableType(table));
+                return Json(data_base.Insert(table, model));
+            }
+            catch
+            {
+                return Json("Ошибка");
+            }
         }
 
         // PUT api/client/2
@@ -83,16 +90,31 @@ namespace OnlineShopRestServer.Controllers
         public JsonResult Put(string table, int id, [FromBody] JObject data)
         {
             data_base = new DataBase(server, port, user, password, database);
-            Model model = (Model)data.ToObject(TypeMap.GetTableType(table));
-            return Json(data_base.Update(table, "id = " + id.ToString(), model));
+            try
+            {
+                Model model = (Model)data.ToObject(TypeMap.GetTableType(table));
+                return Json(data_base.Update(table, "id = " + id.ToString(), model));
+            }
+            catch
+            {
+                return Json("Ошибка");
+            }
         }
 
         // DELETE api/client/2
         [HttpDelete("{table}/{id:int}")]
-        public void Delete(string table, int id)
+        public IActionResult Delete(string table, int id)
         {
-            data_base = new DataBase(server, port, user, password, database);
-            data_base.Delete(table, "id = " + id.ToString());
+            try
+            {
+                data_base = new DataBase(server, port, user, password, database);
+                data_base.Delete(table, "id = " + id.ToString());
+                return Json(new KeyValuePair<string, int>(key: "delete id", value: id));
+            }
+            catch(Npgsql.PostgresException)
+            {
+                return StatusCode(400);
+            }
         }
     }
 }
